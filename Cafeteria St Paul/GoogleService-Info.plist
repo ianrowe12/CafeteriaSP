@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>467227612415-57mknufifigts63ds4kcvue55v75b5qb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.467227612415-57mknufifigts63ds4kcvue55v75b5qb</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDXfH1GUhE0zocbOyed40k-Aec1o2xA3w0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>467227612415</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Ian-Rowe.Cafeteria-St-Paul</string>
+	<key>PROJECT_ID</key>
+	<string>cafeteria-st-paul</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cafeteria-st-paul.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:467227612415:ios:90c71d5d4cd5ea423e68ca</string>
+</dict>
+</plist>
