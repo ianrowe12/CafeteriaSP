@@ -9,5 +9,6 @@ target 'Cafeteria St Paul' do
     pod 'Firebase/Auth'
     pod 'Firebase/Firestore'
     pod 'IQKeyboardManagerSwift'
+    pod 'ProgressHUD'
 
 end

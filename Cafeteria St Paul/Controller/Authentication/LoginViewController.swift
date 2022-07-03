@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import ProgressHUD
 
 class LoginViewController: UIViewController {
     
@@ -26,20 +27,24 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         title = "🟡 St Paul Cafeteria 🟢"
         signInButton.layer.cornerRadius = 10
-        signInButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        
         
     }
     
     @IBAction func signInTapped(_ sender: Any) {
+        
+        ProgressHUD.show("Signing in...")
         if let email = emailField.text, let password = passwordField.text {
             
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let e = error {
                     self.errorLabel.text = e.localizedDescription
                     Haptics.errorVibration()
+                    ProgressHUD.showError()
                 } else {
                     self.performSegue(withIdentifier: "signInSuccessful", sender: self)
                     Haptics.successVibration()
+                    ProgressHUD.dismiss()
                 }
             }
         }

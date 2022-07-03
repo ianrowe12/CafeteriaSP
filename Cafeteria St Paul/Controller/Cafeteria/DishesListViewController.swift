@@ -27,7 +27,7 @@ class DishesListViewController: UIViewController {
     func registerCell(){
     dishesTableView.register(UINib(nibName: "DishListTableCell", bundle: nil), forCellReuseIdentifier: "DishListTableCell")
     }
-    
+    //MARK: - Preparación para enviar los datos actuales a la siguiente pantalla
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! DishDetailViewController
         if let indexPath = dishesTableView.indexPathForSelectedRow {
@@ -36,6 +36,8 @@ class DishesListViewController: UIViewController {
     }
 
 }
+
+    //MARK: - Métodos del TableView
 
 extension DishesListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

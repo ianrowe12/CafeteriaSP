@@ -1,9 +1,4 @@
-//
-//  HomeViewController.swift
-//  Cafeteria St Paul
-//
-//  Created by Ian Rowe on 5/25/22.
-//
+
 
 import UIKit
 
@@ -16,8 +11,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    //MARK: - Vars and constants
     var weekDay = 0
-    
+    var FilteredPopular, FilteredSpecial, FilteredLunch, FilteredBreakfast, FilteredSnackSalado, FilteredDessert: [Dish]?
+    static var selectedDate = Date().addingTimeInterval(24*60*60)
     
     //MARK: - View Will Dissappear
     override func viewWillDisappear(_ animated: Bool) {
@@ -27,6 +24,8 @@ class HomeViewController: UIViewController {
     //MARK: - View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Cafeteria"
+        
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         
@@ -36,30 +35,61 @@ class HomeViewController: UIViewController {
         specialDishesView.delegate = self
         specialDishesView.dataSource = self
         navigationController?.navigationBar.prefersLargeTitles = true
-        datePicker.minimumDate = Date().addingTimeInterval(24*60*60)
+        datePicker.minimumDate = Date().addingTimeInterval(24*60*60) //The minumum date to pick is tomorrow.
         
-        weekDay = Calendar.current.component(.weekday, from: Date())
+        weekDay = Calendar.current.component(.weekday, from: Date().addingTimeInterval(24*60*60))
         
         registerCells()
-        title = "Cafeteria"
-        //filterPopularDays()
+        filterByDate()
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        filterByDate()
+        DispatchQueue.main.async {
+            self.popularDishesView.reloadData()
+            self.specialDishesView.reloadData()
+        }
     }
     
     
     //MARK: - Date was changed
     
     @IBAction func dateChanged(_ sender: Any) {
-        let selectedDate = datePicker.date
-        weekDay = Calendar.current.component(.weekday, from: selectedDate)
+        HomeViewController.selectedDate = datePicker.date
+        weekDay = Calendar.current.component(.weekday, from: HomeViewController.selectedDate)
+        filterByDate()
+        popularDishesView.reloadData()
+        specialDishesView.reloadData()
+        
     }
     
     //MARK: - Variables depending on date
-    func filterPopularDays(){
-        let mondayFilteredPopular = PopularDishes.popularDishes.filter { dish in
-            return dish.dayOfWeek.contains(2)
+    func filterByDate(){
+        FilteredPopular = dishBrain.popularDishes.filter { dish in
+            return dish.dayOfWeek.contains(weekDay)
         }
-        //let tuesdayFilteredPopular = 
+        FilteredSpecial = dishBrain.specialDishes.filter { dish in
+            return dish.dayOfWeek.contains(weekDay)
+        }
+        FilteredLunch = dishBrain.lunch.filter { dish in
+            return dish.dayOfWeek.contains(weekDay)
+        }
+        FilteredBreakfast = dishBrain.breakfast.filter { dish in
+            return dish.dayOfWeek.contains(weekDay)
+        }
+        FilteredSnackSalado = dishBrain.snackSalado.filter { dish in
+            return dish.dayOfWeek.contains(weekDay)
+        }
+        FilteredDessert = dishBrain.dessert.filter { dish in
+            return dish.dayOfWeek.contains(weekDay)
+        }
+        
+        //Esto es para las categorias del siguiente view
+        Categories.categories[0].dishes = FilteredBreakfast!
+        Categories.categories[1].dishes = FilteredLunch!
+        Categories.categories[2].dishes = FilteredSnackSalado!
+        Categories.categories[3].dishes = FilteredDessert!
+        
     }
     
     
@@ -79,15 +109,18 @@ class HomeViewController: UIViewController {
         if segue.identifier == "showDetails" {
             let destinationVC = segue.destination as! DishDetailViewController
             if let indexPath = popularDishesView.indexPathsForSelectedItems?.first {
-                destinationVC.selectedDetail = PopularDishes.popularDishes[indexPath.row]
+                destinationVC.selectedDetail = FilteredPopular![indexPath.row]
             } else if let indexPath = specialDishesView.indexPathsForSelectedItems?.first{
-                destinationVC.selectedDetail = SpecialDishes.specialDishes[indexPath.row]
+                destinationVC.selectedDetail = FilteredSpecial![indexPath.row]
             }
-        } else {
+        } else if segue.identifier == "showList" {
             let destinationVC = segue.destination as! DishesListViewController
             if let indexPath = categoryCollectionView.indexPathsForSelectedItems?.first {
                 destinationVC.currentCategory = Categories.categories[indexPath.row]
             }
+        } else {
+            _ = segue.destination as! OrdersListViewController
+            
         }
         
     }
@@ -105,9 +138,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case categoryCollectionView:
             return Categories.categories.count
         case popularDishesView:
-            return PopularDishes.popularDishes.count
+            return FilteredPopular!.count
         case specialDishesView:
-            return SpecialDishes.specialDishes.count
+            return FilteredSpecial!.count
         default:
             return 0
         }
@@ -128,7 +161,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case popularDishesView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DishCell", for: indexPath) as! DishCell
             
-            cell.setup(withTheDish: PopularDishes.popularDishes[indexPath.row])
+            cell.setup(withTheDish: FilteredPopular![indexPath.row])
             
             cell.isHidden = false
             
@@ -136,7 +169,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case specialDishesView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SpecialDishCell", for: indexPath) as! SpecialDishCell
             
-            cell.setup(specialDish: SpecialDishes.specialDishes[indexPath.row])
+            cell.setup(specialDish: FilteredSpecial![indexPath.row])
             return cell
         default:
             return UICollectionViewCell()

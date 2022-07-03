@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import ProgressHUD
 
 class RegisterViewController: UIViewController {
     
@@ -40,14 +41,18 @@ class RegisterViewController: UIViewController {
     
     @IBAction func registerTapped(_ sender: Any) {
         
+        ProgressHUD.show("Signing you up...")
+        
         if nameField.text == "" || studentIDField.text == "" {
             errorLabel.text = "Please enter a name and student ID (carné)"
+            ProgressHUD.showError()
         } else {
             if let email = emailField.text?.trimmingCharacters(in: .whitespacesAndNewlines), let password = passwordField.text {
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     if let e = error {
                         self.errorLabel.text = "Error: \(e.localizedDescription)"
                         Haptics.errorVibration()
+                        ProgressHUD.showError()
                         
                     } else {
                         let db = Firestore.firestore()
@@ -62,9 +67,11 @@ class RegisterViewController: UIViewController {
                             if error != nil {
                                 self.errorLabel.text = error?.localizedDescription
                                 Haptics.errorVibration()
+                                ProgressHUD.showError()
                             } else {
                                 self.performSegue(withIdentifier: "successfulRegister", sender: self)
                                 Haptics.successVibration()
+                                ProgressHUD.dismiss()
                             }
                         }
                     }
