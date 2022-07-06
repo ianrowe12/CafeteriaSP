@@ -8,6 +8,8 @@ target 'Cafeteria St Paul' do
   # Pods for Cafeteria St Paul
     pod 'Firebase/Auth'
     pod 'Firebase/Firestore'
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Crashlytics'
     pod 'IQKeyboardManagerSwift'
     pod 'ProgressHUD'
 

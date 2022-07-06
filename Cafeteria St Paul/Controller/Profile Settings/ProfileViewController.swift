@@ -41,6 +41,7 @@ class ProfileViewController: UIViewController {
         registerFirstCell()
         registerSecondCell()
         //mySceneDelegate = self.view.window!.windowScene!.delegate
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         retrieveName()
@@ -119,6 +120,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
                 print("Error signing out: %@", signOutError)
                 ProgressHUD.showError(signOutError.localizedDescription)
             }
+        } else if indexPath.row == 0 {
+            tableView.deselectRow(at: indexPath, animated: true)
         } else {
             performSegue(withIdentifier: "showSettingsEditor", sender: self)
         }

@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
     
     //MARK: - View Did Load
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         title = "Cafeteria"
         
         categoryCollectionView.delegate = self

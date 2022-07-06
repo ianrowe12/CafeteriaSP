@@ -22,7 +22,11 @@ class CardView: UIView {
     }
     
     private func initialSetup() {
-        layer.shadowColor = UIColor.black.cgColor
+        if UserDefaults.standard.bool(forKey: "darkMode") == true {
+            layer.shadowColor = UIColor.white.cgColor
+        } else {
+            layer.shadowColor = UIColor.black.cgColor
+        }
         layer.shadowOffset = .zero //So that it doesnt have any particular angle.
         layer.cornerRadius = 10
         layer.shadowOpacity = 0.1
