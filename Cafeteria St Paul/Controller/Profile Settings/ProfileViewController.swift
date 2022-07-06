@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import ProgressHUD
 
 class ProfileViewController: UIViewController {
     
@@ -19,6 +20,9 @@ class ProfileViewController: UIViewController {
         }
     }
     let db = Firestore.firestore()
+    let defaults = UserDefaults.standard
+    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+    var controller: UIViewController!
     
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -36,6 +40,7 @@ class ProfileViewController: UIViewController {
         //retrieveName()
         registerFirstCell()
         registerSecondCell()
+        //mySceneDelegate = self.view.window!.windowScene!.delegate
     }
     override func viewWillAppear(_ animated: Bool) {
         retrieveName()
@@ -68,7 +73,7 @@ class ProfileViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! SettingsEditorViewController
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.propertyBeingEdited = SettingsList.settingsList[indexPath.row].label
+            destinationVC.propertyBeingEdited = SettingsList.settingsList[indexPath.row - 1].label
         }
     }
 }
@@ -81,27 +86,38 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SettingsList.settingsList.count
+        return SettingsList.settingsList.count + 1
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsTableViewCell", for: indexPath) as! SettingsTableViewCell
-        cell.setUpCell(setting: SettingsList.settingsList[indexPath.row])
-        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        return cell
-        
+        if indexPath.row == 0 {
+           let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchSettingTableViewCell", for: indexPath) as! SwitchSettingTableViewCell
+            cell.setUpCell(setting: SlideSetting(label: "Dark Mode", image: UIImage(imageLiteralResourceName: "appearance"), darkMode: UserDefaults.standard.bool(forKey: "darkMode")))
+            return cell
+        } else {
+           let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsTableViewCell", for: indexPath) as! SettingsTableViewCell
+            cell.setUpCell(setting: SettingsList.settingsList[indexPath.row - 1])
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.row == SettingsList.settingsList.count - 1 {
+        Haptics.selectionVibration()
+        if indexPath.row == SettingsList.settingsList.count {
             do {
                 try Auth.auth().signOut()
+                defaults.setValue(false, forKey: "wantsSessionPersistence")
+                controller = storyBoard.instantiateViewController(withIdentifier: "firstNav") as! UINavigationController
+                SceneDelegate.window?.rootViewController = controller
                 self.parent?.navigationController?.popToRootViewController(animated: true)
+                //mySceneDelegate.window?.rootViewController = controller
             } catch let signOutError as NSError {
                 print("Error signing out: %@", signOutError)
+                ProgressHUD.showError(signOutError.localizedDescription)
             }
         } else {
             performSegue(withIdentifier: "showSettingsEditor", sender: self)

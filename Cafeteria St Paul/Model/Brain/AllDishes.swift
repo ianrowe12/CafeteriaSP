@@ -14,3 +14,6 @@ struct D {
     static let pañuelos = Dish(name: "Pañuelos", image: UIImage(imageLiteralResourceName: "pañuelos"), price: "₡700", description: "Puff pastry combined with the sweet flavor of the stuffed arequipe", dayOfWeek: [4, 5, 6])
     static let cachitos = Dish(name: "Cachitos", image: UIImage(imageLiteralResourceName: "cachitos"), price: "₡600", description: "It consists of a soft dough filled with delicacy, pastry cream or with chocolate cream", dayOfWeek: [2, 5, 6])
 }
+
+
+// IF NEW DISHES ARE ADDED, THEY MUST BE INCLUDED IN THE DishDictionary AS WELL

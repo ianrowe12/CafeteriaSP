@@ -3,6 +3,7 @@ import UIKit
 
 struct SettingsList{
     static let settingsList: [Setting] = [
+        //.init(label: "Dark Mode", image: UIImage(imageLiteralResourceName: "appearance")),
         .init(label: "Change Email", image: UIImage(imageLiteralResourceName: "email-1")),
         .init(label: "Change Username", image: UIImage(imageLiteralResourceName: "username")),
         .init(label: "Change carné", image: UIImage(imageLiteralResourceName: "ID")),

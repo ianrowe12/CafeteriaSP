@@ -21,6 +21,8 @@ class DishDetailViewController: UIViewController {
     var formattedDate: String?
     var intervalDate: Double?
     
+    var internalFormattedDate: String? //This one will be used for the alert to let users know the time for which they're buying
+    
     let db = Firestore.firestore()
     var Carné: String?
     var Nombre: String?
@@ -43,22 +45,41 @@ class DishDetailViewController: UIViewController {
     
     //MARK: - Date Handler
     func formatDate(dateToUse: Date){
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .full
-        dateFormatter.locale = Locale(identifier: "es_CR")
-        dateFormatter.timeZone = .current
-        formattedDate = dateFormatter.string(from: dateToUse) //Estas dos variables tienen que ser cambiadas en caso de reutilizar la función
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateStyle = .full
+        dateFormatter1.locale = Locale(identifier: "es_CR")
+        dateFormatter1.timeZone = .current
+        formattedDate = dateFormatter1.string(from: dateToUse) //Estas dos variables tienen que ser cambiadas en caso de reutilizar la función
         intervalDate = dateToUse.timeIntervalSince1970
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateStyle = .full
+        dateFormatter2.locale = Locale(identifier: "en_US")
+        dateFormatter2.timeZone = .current
+        internalFormattedDate = dateFormatter2.string(from: dateToUse)
     }
     
     //MARK: - Compra y exportación de datos a Firestore
     @IBAction func purchaseTapped(_ sender: Any) {
-        //Si el completion handler de la compra da positivo entonces:
-        ProgressHUD.show("Placing Order...")
-        sendOrder()
+        alert()
+    }
+    
+    func alert() {
+        
+        let alert = UIAlertController(title: "Are you sure you want to eat this on \(internalFormattedDate ?? "the selected date")?", message: "", preferredStyle: .alert)
+        let proceedAction = UIAlertAction(title: "Yes, Proceed to Checkout", style: .default) { alertAction in
+            self.sendOrder() //Si el completion handler de la compra da positivo entonces:
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { alertAction in
+        }
+        alert.addAction(proceedAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     func sendOrder() {
+        ProgressHUD.show("Placing Order...🧑‍🍳")
         self.getFromUsersCollection() { [self] username, id in
             self.db.collection("orders").document((Auth.auth().currentUser!.uid)).collection("2022").addDocument(data: [
                 "Carné" : id,

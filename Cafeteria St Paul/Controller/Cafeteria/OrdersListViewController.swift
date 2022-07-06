@@ -47,21 +47,25 @@ class OrdersListViewController: UIViewController {
                     print("There was an error retrieving the order from Firestore: \(error). Simple error description: \(error!.localizedDescription)")
                 } else {
                     if let firestoreDocuments = querySnapshot?.documents {
-                        print("OK1")
-                        print(firestoreDocuments)
-                        for doc in firestoreDocuments {
-                            print("OK2")
-                            let data = doc.data()
-                            if let dish = data["Platillo"] as? String, let date = data["Date"] as? String, let interval = data["Interval"] as? Double{
-                                print("OK3")
-                                if interval > Date().timeIntervalSince1970 - 60*60*14 { //Make sure only pending orders are showing. They wont be shown if they're older than yesterday (60*60*14).
-                                    let order = Order(dish: DishDictionary.myDict[dish]!, date: date)
-                                    self.orders.append(order)
-                                    print("OK4")
-                                }
-                                ProgressHUD.dismiss()
-                                DispatchQueue.main.async {
-                                    self.tableView.reloadData()
+                        if firestoreDocuments == [] {
+                            ProgressHUD.showError("You haven't made any orders yet")
+                        } else {
+                            print("OK1")
+                            print(firestoreDocuments)
+                            for doc in firestoreDocuments {
+                                print("OK2")
+                                let data = doc.data()
+                                if let dish = data["Platillo"] as? String, let date = data["Date"] as? String, let interval = data["Interval"] as? Double{
+                                    print("OK3")
+                                    if interval > Date().timeIntervalSince1970 - 60*60*14 { //Make sure only pending orders are showing. They wont be shown if they're older than yesterday (60*60*14).
+                                        let order = Order(dish: DishDictionary.myDict[dish]!, date: date)
+                                        self.orders.append(order)
+                                        print("OK4")
+                                    }
+                                    ProgressHUD.dismiss()
+                                    DispatchQueue.main.async {
+                                        self.tableView.reloadData()
+                                    }
                                 }
                             }
                         }

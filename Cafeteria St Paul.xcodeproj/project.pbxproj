@@ -30,7 +30,6 @@
 		7963999926C6D7710056BD4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7963999826C6D7710056BD4B /* Assets.xcassets */; };
 		796DEC252859252C003E8085 /* categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796DEC242859252C003E8085 /* categories.swift */; };
 		797F88C12870CA970097236F /* SettingsEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797F88C02870CA970097236F /* SettingsEditorViewController.swift */; };
-		7983B07B2860C49F00027340 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983B0792860C49F00027340 /* SettingsTableViewCell.swift */; };
 		7983B07C2860C49F00027340 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7983B07A2860C49F00027340 /* SettingsTableViewCell.xib */; };
 		798F36EE2869C6E100800EFB /* OrdersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798F36ED2869C6E100800EFB /* OrdersListViewController.swift */; };
 		798F36F22869C87C00800EFB /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798F36F02869C87C00800EFB /* OrderTableViewCell.swift */; };
@@ -50,6 +49,16 @@
 		79E2E80D283E4D7A00C08B48 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E2E80C283E4D7A00C08B48 /* InitialViewController.swift */; };
 		79E2E80F283E632100C08B48 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E2E80E283E632100C08B48 /* HomeViewController.swift */; };
 		79FC60B72870E9600094C448 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60B62870E9600094C448 /* Constants.swift */; };
+		79FC60BA287230BE0094C448 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60B9287230BE0094C448 /* WelcomeViewController.swift */; };
+		79FC60BD287234EE0094C448 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60BC287234EE0094C448 /* WelcomePage.swift */; };
+		79FC60BF2872356E0094C448 /* welcomePages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60BE2872356E0094C448 /* welcomePages.swift */; };
+		79FC60C1287239840094C448 /* WelcomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60C0287239840094C448 /* WelcomeCollectionViewCell.swift */; };
+		79FC60C328737D140094C448 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60C228737D140094C448 /* UserDefaultsExtension.swift */; };
+		79FC60C52874C9670094C448 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60C42874C9670094C448 /* PasswordResetViewController.swift */; };
+		79FC60C8287503F00094C448 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60C6287503F00094C448 /* SettingsTableViewCell.swift */; };
+		79FC60CA2875053B0094C448 /* SlideSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60C92875053B0094C448 /* SlideSetting.swift */; };
+		79FC60D12875110F0094C448 /* SwitchSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60CF2875110F0094C448 /* SwitchSettingTableViewCell.swift */; };
+		79FC60D22875110F0094C448 /* SwitchSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79FC60D02875110F0094C448 /* SwitchSettingTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,7 +87,6 @@
 		7963999D26C6D7710056BD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		796DEC242859252C003E8085 /* categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = categories.swift; sourceTree = "<group>"; };
 		797F88C02870CA970097236F /* SettingsEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEditorViewController.swift; sourceTree = "<group>"; };
-		7983B0792860C49F00027340 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		7983B07A2860C49F00027340 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
 		798F36ED2869C6E100800EFB /* OrdersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersListViewController.swift; sourceTree = "<group>"; };
 		798F36F02869C87C00800EFB /* OrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
@@ -98,6 +106,16 @@
 		79E2E80C283E4D7A00C08B48 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		79E2E80E283E632100C08B48 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		79FC60B62870E9600094C448 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		79FC60B9287230BE0094C448 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		79FC60BC287234EE0094C448 /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
+		79FC60BE2872356E0094C448 /* welcomePages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = welcomePages.swift; sourceTree = "<group>"; };
+		79FC60C0287239840094C448 /* WelcomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		79FC60C228737D140094C448 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		79FC60C42874C9670094C448 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
+		79FC60C6287503F00094C448 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		79FC60C92875053B0094C448 /* SlideSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideSetting.swift; sourceTree = "<group>"; };
+		79FC60CF2875110F0094C448 /* SwitchSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchSettingTableViewCell.swift; sourceTree = "<group>"; };
+		79FC60D02875110F0094C448 /* SwitchSettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchSettingTableViewCell.xib; sourceTree = "<group>"; };
 		863CAB8DCD7F67BA282BA918 /* Pods-Cafeteria St Paul.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cafeteria St Paul.debug.xcconfig"; path = "Target Support Files/Pods-Cafeteria St Paul/Pods-Cafeteria St Paul.debug.xcconfig"; sourceTree = "<group>"; };
 		B53EA8C61865DDD42D2F86B2 /* Pods-Cafeteria St Paul.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cafeteria St Paul.release.xcconfig"; path = "Target Support Files/Pods-Cafeteria St Paul/Pods-Cafeteria St Paul.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +156,7 @@
 				793927E3283FFC97004E7D97 /* DishCells */,
 				793927D9283F9166004E7D97 /* CategoryCollectionViewCell */,
 				795264022840E48B0084E58F /* SpecialDishCell */,
+				79FC60C0287239840094C448 /* WelcomeCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -181,6 +200,7 @@
 			children = (
 				795263FC2840E1D10084E58F /* ViewsExtension.swift */,
 				7949337D284514DB0038910F /* UIVIews+Extension.swift */,
+				79FC60C228737D140094C448 /* UserDefaultsExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -239,6 +259,7 @@
 				7913CBB9286FBAAE00B4128F /* AllDishes.swift */,
 				79502B5328622301004A5981 /* SettingsList.swift */,
 				7913CBBB286FBC8700B4128F /* DishDictionary.swift */,
+				79FC60BE2872356E0094C448 /* welcomePages.swift */,
 			);
 			path = Brain;
 			sourceTree = "<group>";
@@ -246,8 +267,10 @@
 		7983B0782860C47900027340 /* SettingsTableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				7983B0792860C49F00027340 /* SettingsTableViewCell.swift */,
+				79FC60C6287503F00094C448 /* SettingsTableViewCell.swift */,
 				7983B07A2860C49F00027340 /* SettingsTableViewCell.xib */,
+				79FC60CF2875110F0094C448 /* SwitchSettingTableViewCell.swift */,
+				79FC60D02875110F0094C448 /* SwitchSettingTableViewCell.xib */,
 			);
 			path = SettingsTableViewCells;
 			sourceTree = "<group>";
@@ -285,6 +308,7 @@
 			children = (
 				79AC2F4226C6EB3D00D88FB5 /* RegisterViewController.swift */,
 				79AC2F4426C6EB5B00D88FB5 /* LoginViewController.swift */,
+				79FC60C42874C9670094C448 /* PasswordResetViewController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -294,9 +318,11 @@
 			children = (
 				796DEC232859251C003E8085 /* Brain */,
 				793927DE283F930C004E7D97 /* DishCategory.swift */,
+				79FC60C92875053B0094C448 /* SlideSetting.swift */,
 				799B1CD5283FFF5600314981 /* Dish.swift */,
 				79502B5128622085004A5981 /* Setting.swift */,
 				798F36F42869D2F700800EFB /* Order.swift */,
+				79FC60BC287234EE0094C448 /* WelcomePage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -313,10 +339,11 @@
 		79AC2F4126C6DBA500D88FB5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				79FC60B8287230990094C448 /* Welcome */,
+				799F9F3E2841309A00414BB0 /* Authentication */,
 				79B9362D28575030009373C8 /* Profile Settings */,
 				79B9362A28574FDE009373C8 /* Cafeteria */,
 				793BC7CF284180E0009E3FF5 /* WebView */,
-				799F9F3E2841309A00414BB0 /* Authentication */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -340,6 +367,14 @@
 				797F88C02870CA970097236F /* SettingsEditorViewController.swift */,
 			);
 			path = "Profile Settings";
+			sourceTree = "<group>";
+		};
+		79FC60B8287230990094C448 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				79FC60B9287230BE0094C448 /* WelcomeViewController.swift */,
+			);
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 		C1B582C6ADF8564964DB1548 /* Frameworks */ = {
@@ -422,6 +457,7 @@
 				7917A5F5284A243C0094FCD3 /* LaunchScreen.storyboard in Resources */,
 				799F9F3D28412D2000414BB0 /* DishListTableCell.xib in Resources */,
 				7983B07C2860C49F00027340 /* SettingsTableViewCell.xib in Resources */,
+				79FC60D22875110F0094C448 /* SwitchSettingTableViewCell.xib in Resources */,
 				79AC2F3E26C6DB8C00D88FB5 /* GoogleService-Info.plist in Resources */,
 				795264012840E47D0084E58F /* SpecialDishCell.xib in Resources */,
 				798F36F32869C87C00800EFB /* OrderTableViewCell.xib in Resources */,
@@ -481,8 +517,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				79E2E80D283E4D7A00C08B48 /* InitialViewController.swift in Sources */,
+				79FC60C1287239840094C448 /* WelcomeCollectionViewCell.swift in Sources */,
 				793927E2283FF055004E7D97 /* CardView.swift in Sources */,
+				79FC60C8287503F00094C448 /* SettingsTableViewCell.swift in Sources */,
 				79B9362F28575044009373C8 /* ProfileViewController.swift in Sources */,
+				79FC60C328737D140094C448 /* UserDefaultsExtension.swift in Sources */,
 				7913CBBC286FBC8700B4128F /* DishDictionary.swift in Sources */,
 				795263FD2840E1D10084E58F /* ViewsExtension.swift in Sources */,
 				7963999026C6D76F0056BD4B /* AppDelegate.swift in Sources */,
@@ -497,18 +536,23 @@
 				793927DF283F930C004E7D97 /* DishCategory.swift in Sources */,
 				79AC2F4526C6EB5B00D88FB5 /* LoginViewController.swift in Sources */,
 				79502B5428622301004A5981 /* SettingsList.swift in Sources */,
+				79FC60D12875110F0094C448 /* SwitchSettingTableViewCell.swift in Sources */,
+				79FC60CA2875053B0094C448 /* SlideSetting.swift in Sources */,
 				796DEC252859252C003E8085 /* categories.swift in Sources */,
 				79AC2F4326C6EB3D00D88FB5 /* RegisterViewController.swift in Sources */,
 				79502B5228622085004A5981 /* Setting.swift in Sources */,
+				79FC60BF2872356E0094C448 /* welcomePages.swift in Sources */,
 				799B1CD3283FFD5500314981 /* DishCell.swift in Sources */,
 				793BC7D1284180F7009E3FF5 /* WebViewController.swift in Sources */,
 				7913CBBA286FBAAF00B4128F /* AllDishes.swift in Sources */,
+				79FC60BD287234EE0094C448 /* WelcomePage.swift in Sources */,
 				793927DC283F91B5004E7D97 /* CategoryCollectionViewCell.swift in Sources */,
+				79FC60BA287230BE0094C448 /* WelcomeViewController.swift in Sources */,
 				795264002840E47D0084E58F /* SpecialDishCell.swift in Sources */,
 				797F88C12870CA970097236F /* SettingsEditorViewController.swift in Sources */,
 				7917A5F8284A2EC00094FCD3 /* Haptics.swift in Sources */,
 				79E2E80F283E632100C08B48 /* HomeViewController.swift in Sources */,
-				7983B07B2860C49F00027340 /* SettingsTableViewCell.swift in Sources */,
+				79FC60C52874C9670094C448 /* PasswordResetViewController.swift in Sources */,
 				798F36F22869C87C00800EFB /* OrderTableViewCell.swift in Sources */,
 				79ACDDEC2859F98200A18CBD /* DishBrain.swift in Sources */,
 				799F9F3C28412D2000414BB0 /* DishListTableCell.swift in Sources */,

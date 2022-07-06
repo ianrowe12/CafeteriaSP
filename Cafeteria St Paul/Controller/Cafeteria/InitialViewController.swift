@@ -10,6 +10,10 @@ import UIKit
 class InitialViewController: UIViewController {
     
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var createAccountButton: UIButton!
     
