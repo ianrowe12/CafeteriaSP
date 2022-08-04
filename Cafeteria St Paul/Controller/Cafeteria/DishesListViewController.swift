@@ -31,7 +31,7 @@ class DishesListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! DishDetailViewController
         if let indexPath = dishesTableView.indexPathForSelectedRow {
-            destinationVC.selectedDetail = currentCategory?.dishes[indexPath.row]
+            destinationVC.selectedDetail = currentCategory?.dishes![indexPath.row] //El ! fue añadido porque dishes se hizo opcional
         }
     }
 
@@ -41,12 +41,12 @@ class DishesListViewController: UIViewController {
 
 extension DishesListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentCategory!.dishes.count
+        return currentCategory!.dishes!.count //Dishes ahora tiene ! porque ahora es opcional en categories
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dishesTableView.dequeueReusableCell(withIdentifier: "DishListTableCell", for: indexPath) as! DishListTableCell
-        cell.setup(dish: currentCategory!.dishes[indexPath.row])
+        cell.setup(dish: currentCategory!.dishes![indexPath.row])//Dishes ahora tiene ! porque ahora es opcional en categories
         return cell
     }
     

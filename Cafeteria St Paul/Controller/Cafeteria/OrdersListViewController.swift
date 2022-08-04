@@ -22,6 +22,7 @@ class OrdersListViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+                
         
         registerCell()
         loadOrders()
@@ -38,10 +39,16 @@ class OrdersListViewController: UIViewController {
         tableView.register(UINib(nibName: "OrderTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderTableViewCell")
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! OrderDetailViewController
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.order = orders[indexPath.row]
+        }
+    }
+    
     func loadOrders() {
-        db.collection("orders")
-            .document(String(Auth.auth().currentUser!.uid))
-            .collection("2022")
+        db.collection("orders2")
+            .whereField("uid", isEqualTo: Auth.auth().currentUser!.uid)
             .order(by: "Interval", descending: false).getDocuments { querySnapshot, error in
                 if error != nil {
                     print("There was an error retrieving the order from Firestore: \(error). Simple error description: \(error!.localizedDescription)")
@@ -54,11 +61,14 @@ class OrdersListViewController: UIViewController {
                             print(firestoreDocuments)
                             for doc in firestoreDocuments {
                                 print("OK2")
+                                let orderNUMBER = doc.documentID
                                 let data = doc.data()
-                                if let dish = data["Platillo"] as? String, let date = data["Date"] as? String, let interval = data["Interval"] as? Double{
+                                if let dish = data["Platillo"] as? String, let date = data["Date"] as? String, let interval = data["Interval"] as? Double, let orderNum = orderNUMBER as? String, let userName = data["Nombre"] as? String, let image = data["imageURL"] as? String {
                                     print("OK3")
                                     if interval > Date().timeIntervalSince1970 - 60*60*14 { //Make sure only pending orders are showing. They wont be shown if they're older than yesterday (60*60*14).
-                                        let order = Order(dish: DishDictionary.myDict[dish]!, date: date)
+//                                        let order = Order(dish: DishDictionary.myDict[dish]!, date: date, orderNum: orderNum, userName: userName)
+                                        let order = Order(date: date, orderNum: orderNum, userName: userName, dishName: dish, imageURL: image)
+                                        
                                         self.orders.append(order)
                                         print("OK4")
                                     }
@@ -87,6 +97,12 @@ extension OrdersListViewController: UITableViewDelegate, UITableViewDataSource {
         let currentOrder = orders[indexPath.row]
         cell.setupCell(with: currentOrder)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Haptics.selectionVibration()
+        self.performSegue(withIdentifier: "showOrder", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

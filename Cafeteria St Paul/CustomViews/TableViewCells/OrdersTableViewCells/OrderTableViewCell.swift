@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class OrderTableViewCell: UITableViewCell {
 
@@ -24,8 +25,9 @@ class OrderTableViewCell: UITableViewCell {
     @IBOutlet weak var orderNum: UILabel!
     
     func setupCell(with Order: Order) {
-        orderImage.image = Order.dish.image
-        orderName.text = Order.dish.name
-        orderDate.text = Order.date        
+        orderName.text = Order.dishName
+        orderDate.text = Order.date
+        orderNum.text = "Order #\(Order.orderNum)"
+        orderImage.kf.setImage(with: URL(string: Order.imageURL))
     }
 }

@@ -46,6 +46,7 @@
 		79AC2F4526C6EB5B00D88FB5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AC2F4426C6EB5B00D88FB5 /* LoginViewController.swift */; };
 		79ACDDEC2859F98200A18CBD /* DishBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ACDDEB2859F98200A18CBD /* DishBrain.swift */; };
 		79B9362F28575044009373C8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B9362E28575044009373C8 /* ProfileViewController.swift */; };
+		79BAFB74288E0D4A00250BAA /* datesNdishes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BAFB73288E0D4A00250BAA /* datesNdishes.swift */; };
 		79E2E80D283E4D7A00C08B48 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E2E80C283E4D7A00C08B48 /* InitialViewController.swift */; };
 		79E2E80F283E632100C08B48 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E2E80E283E632100C08B48 /* HomeViewController.swift */; };
 		79FC60B72870E9600094C448 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60B62870E9600094C448 /* Constants.swift */; };
@@ -59,6 +60,7 @@
 		79FC60CA2875053B0094C448 /* SlideSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60C92875053B0094C448 /* SlideSetting.swift */; };
 		79FC60D12875110F0094C448 /* SwitchSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FC60CF2875110F0094C448 /* SwitchSettingTableViewCell.swift */; };
 		79FC60D22875110F0094C448 /* SwitchSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79FC60D02875110F0094C448 /* SwitchSettingTableViewCell.xib */; };
+		79FF156728873DDC00717193 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FF156628873DDC00717193 /* OrderDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +105,7 @@
 		79AC2F4426C6EB5B00D88FB5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		79ACDDEB2859F98200A18CBD /* DishBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishBrain.swift; sourceTree = "<group>"; };
 		79B9362E28575044009373C8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		79BAFB73288E0D4A00250BAA /* datesNdishes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = datesNdishes.swift; sourceTree = "<group>"; };
 		79E2E80C283E4D7A00C08B48 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		79E2E80E283E632100C08B48 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		79FC60B62870E9600094C448 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -116,6 +119,7 @@
 		79FC60C92875053B0094C448 /* SlideSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideSetting.swift; sourceTree = "<group>"; };
 		79FC60CF2875110F0094C448 /* SwitchSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchSettingTableViewCell.swift; sourceTree = "<group>"; };
 		79FC60D02875110F0094C448 /* SwitchSettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchSettingTableViewCell.xib; sourceTree = "<group>"; };
+		79FF156628873DDC00717193 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		863CAB8DCD7F67BA282BA918 /* Pods-Cafeteria St Paul.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cafeteria St Paul.debug.xcconfig"; path = "Target Support Files/Pods-Cafeteria St Paul/Pods-Cafeteria St Paul.debug.xcconfig"; sourceTree = "<group>"; };
 		B53EA8C61865DDD42D2F86B2 /* Pods-Cafeteria St Paul.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cafeteria St Paul.release.xcconfig"; path = "Target Support Files/Pods-Cafeteria St Paul/Pods-Cafeteria St Paul.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -260,6 +264,7 @@
 				79502B5328622301004A5981 /* SettingsList.swift */,
 				7913CBBB286FBC8700B4128F /* DishDictionary.swift */,
 				79FC60BE2872356E0094C448 /* welcomePages.swift */,
+				79BAFB73288E0D4A00250BAA /* datesNdishes.swift */,
 			);
 			path = Brain;
 			sourceTree = "<group>";
@@ -356,6 +361,7 @@
 				79526405284100580084E58F /* DishDetailViewController.swift */,
 				799F9F3F284130E100414BB0 /* DishesListViewController.swift */,
 				798F36ED2869C6E100800EFB /* OrdersListViewController.swift */,
+				79FF156628873DDC00717193 /* OrderDetailViewController.swift */,
 			);
 			path = Cafeteria;
 			sourceTree = "<group>";
@@ -505,7 +511,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+			shellScript = "#\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		A7837DEDDBB17D698CF28DEC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -568,6 +574,7 @@
 				79FC60BD287234EE0094C448 /* WelcomePage.swift in Sources */,
 				793927DC283F91B5004E7D97 /* CategoryCollectionViewCell.swift in Sources */,
 				79FC60BA287230BE0094C448 /* WelcomeViewController.swift in Sources */,
+				79BAFB74288E0D4A00250BAA /* datesNdishes.swift in Sources */,
 				795264002840E47D0084E58F /* SpecialDishCell.swift in Sources */,
 				797F88C12870CA970097236F /* SettingsEditorViewController.swift in Sources */,
 				7917A5F8284A2EC00094FCD3 /* Haptics.swift in Sources */,
@@ -576,6 +583,7 @@
 				798F36F22869C87C00800EFB /* OrderTableViewCell.swift in Sources */,
 				79ACDDEC2859F98200A18CBD /* DishBrain.swift in Sources */,
 				799F9F3C28412D2000414BB0 /* DishListTableCell.swift in Sources */,
+				79FF156728873DDC00717193 /* OrderDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,12 +724,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2V636U3DWT;
 				INFOPLIST_FILE = "Cafeteria St Paul/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -enable-experimental-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = "Ian-Rowe.Cafeteria-St-Paul";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -736,12 +746,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2V636U3DWT;
 				INFOPLIST_FILE = "Cafeteria St Paul/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -enable-experimental-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = "Ian-Rowe.Cafeteria-St-Paul";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

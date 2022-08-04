@@ -33,11 +33,12 @@ class DishDetailViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         setup(with: selectedDetail!)
-        formatDate(dateToUse: HomeViewController.selectedDate)
+        formatDate(dateToUse: HomeViewController.selectedDate!)
+        
     }
     //MARK: - Poblar la pantalla con los datos
     func setup(with Dish: Dish){
-        detailImage.image = Dish.image
+        detailImage.kf.setImage(with: URL(string: Dish.imageURL))
         dishDetailTitle.text = Dish.name
         dishDetailPrice.text = Dish.price
         dishDetailDescription.text = Dish.description
@@ -78,24 +79,71 @@ class DishDetailViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func sendOrder() {
+    
+    func sendOrder()  {
         ProgressHUD.show("Placing Order...🧑‍🍳")
-        self.getFromUsersCollection() { [self] username, id in
-            self.db.collection("orders").document((Auth.auth().currentUser!.uid)).collection("2022").addDocument(data: [
-                "Carné" : id,
-                "Nombre" : username,
-                "Date" : self.formattedDate!,
-                "Platillo": self.selectedDetail?.name ?? "error",
-                "Interval": self.intervalDate!
-            ]) { error in
-                if let e = error {
-                    ProgressHUD.showError("Error while placing your order")
-                    print(e)
-                } else {
-                    ProgressHUD.showSuccess("Order placed Succesfully")
+        //var orderId: Int = 0
+        
+        
+        self.db.collection("orders2").order(by: "orderId", descending: true).limit(to: 1).getDocuments { querySnapshot, error in
+            if error != nil {
+                print("There was an error retrieving the order from Firestore: \(error). Simple error description: \(error!.localizedDescription)")
+            } else {
+                if let firestoreDocuments = querySnapshot?.documents {
+                    if firestoreDocuments == [] {
+                        print("no hay nada")
+                    } else {
+                        var orderNum = 0
+                        for doc in firestoreDocuments {
+                            //let data = doc.data()
+                            let data = doc.documentID
+                            //orderNum = data["orderId"] as! Int
+                            orderNum = Int(data)!
+                            print(orderNum)
+                        }
+                        self.getFromUsersCollection() { [self] username, id in
+                            self.db.collection("orders2").document(String(orderNum + 1)).setData([
+                                "Carné" : id,
+                                "Nombre" : username,
+                                "Date" : self.formattedDate!,
+                                "Platillo": self.selectedDetail?.name ?? "error",
+                                "Interval": self.intervalDate!,
+                                "uid" : Auth.auth().currentUser!.uid,
+                                "orderId" : orderNum + 1,
+                                "Retirado" : false,
+                                "imageURL": self.selectedDetail?.imageURL
+                            ])
+                            { error in
+                                if let e = error {
+                                    ProgressHUD.showError("Error while placing your order")
+                                    print(e)
+                                } else {
+                                    ProgressHUD.showSuccess("Order placed Succesfully")
+                                }
+                            }
+                        }
+                    }
                 }
+                
             }
         }
+        
+        //        self.getFromUsersCollection() { [self] username, id in
+        //            self.db.collection("orders").document((Auth.auth().currentUser!.uid)).collection("2022").addDocument(data: [
+        //                "Carné" : id,
+        //                "Nombre" : username,
+        //                "Date" : self.formattedDate!,
+        //                "Platillo": self.selectedDetail?.name ?? "error",
+        //                "Interval": self.intervalDate!
+        //            ]) { error in
+        //                if let e = error {
+        //                    ProgressHUD.showError("Error while placing your order")
+        //                    print(e)
+        //                } else {
+        //                    ProgressHUD.showSuccess("Order placed Succesfully")
+        //                }
+        //            }
+        //        }
     }
     
     

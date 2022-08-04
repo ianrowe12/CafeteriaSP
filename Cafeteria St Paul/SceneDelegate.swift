@@ -36,8 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //                    controller = storyBoard.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
         //                }
         //            }
-        //        }
-        
+        //        }        
         
         if UserDefaults.standard.notFirstTime {
             if UserDefaults.standard.bool(forKey: "wantsSessionPersistence") == true {
@@ -64,6 +63,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         SceneDelegate.window?.rootViewController = controller
         SceneDelegate.window?.makeKeyAndVisible()
         //SceneDelegate.window?.overrideUserInterfaceStyle = .light
+                
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

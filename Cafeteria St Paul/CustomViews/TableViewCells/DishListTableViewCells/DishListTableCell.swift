@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DishListTableCell: UITableViewCell {
 
@@ -17,7 +18,7 @@ class DishListTableCell: UITableViewCell {
     func setup(dish: Dish){
         cellTitle.text = dish.name
         cellPrice.text = dish.price
-        cellImage.image = dish.image
+        cellImage.kf.setImage(with: URL(string: dish.imageURL))
     }
     
 }

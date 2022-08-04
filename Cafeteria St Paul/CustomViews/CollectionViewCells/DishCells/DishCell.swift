@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DishCell: UICollectionViewCell {
     
@@ -23,8 +24,7 @@ class DishCell: UICollectionViewCell {
         titleLabel.text = popularDish.name
         priceLabel.text = popularDish.price
         descriptionLabel.text = popularDish.description
-        dishImage.image = popularDish.image
-        
+        dishImage.kf.setImage(with: URL(string: popularDish.imageURL))
     }
 
 }
