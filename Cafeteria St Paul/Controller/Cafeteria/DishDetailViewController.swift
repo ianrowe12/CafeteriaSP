@@ -21,6 +21,9 @@ class DishDetailViewController: UIViewController {
     var formattedDate: String?
     var intervalDate: Double?
     
+    var paymentHandler = PaymentHandler()
+    var paymentSuccess = false
+    
     var internalFormattedDate: String? //This one will be used for the alert to let users know the time for which they're buying
     
     let db = Firestore.firestore()
@@ -62,14 +65,22 @@ class DishDetailViewController: UIViewController {
     
     //MARK: - Compra y exportación de datos a Firestore
     @IBAction func purchaseTapped(_ sender: Any) {
-        alert()
+        self.alert()
     }
     
     func alert() {
         
         let alert = UIAlertController(title: "Are you sure you want to eat this on \(internalFormattedDate ?? "the selected date")?", message: "", preferredStyle: .alert)
         let proceedAction = UIAlertAction(title: "Yes, Proceed to Checkout", style: .default) { alertAction in
-            self.sendOrder() //Si el completion handler de la compra da positivo entonces:
+            self.paymentHandler.startPayment(product: self.selectedDetail!) { success in
+                self.paymentSuccess = success
+                if success == true {
+                    self.sendOrder() //Si el completion handler de la compra da positivo entonces:
+                } else {
+                    ProgressHUD.showError("The payment could not be processed")
+                }
+                
+            }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { alertAction in
         }

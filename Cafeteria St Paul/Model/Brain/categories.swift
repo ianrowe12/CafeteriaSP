@@ -8,6 +8,6 @@ struct Categories {
         .init(name: "Fast Dishes", image: UIImage(imageLiteralResourceName: "snacks-salados"), dishes:
             []
         ),
-        .init(name: "Sweet Snacks", image: UIImage(imageLiteralResourceName: "snacks-dulces"), dishes: [])
+        .init(name: "Desserts", image: UIImage(imageLiteralResourceName: "snacks-dulces"), dishes: [])
     ]
 }
