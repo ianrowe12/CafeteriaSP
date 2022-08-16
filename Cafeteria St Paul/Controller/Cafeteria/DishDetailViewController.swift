@@ -15,6 +15,7 @@ class DishDetailViewController: UIViewController {
     @IBOutlet weak var dishDetailTitle: UILabel!
     @IBOutlet weak var dishDetailPrice: UILabel!
     @IBOutlet weak var dishDetailDescription: UILabel!
+    @IBOutlet weak var textField: UITextField!
     
     //MARK: - Variables and constants
     var selectedDetail: Dish?
@@ -30,6 +31,8 @@ class DishDetailViewController: UIViewController {
     var Carné: String?
     var Nombre: String?
     
+    let populars = ["French Fries", "Fries & Nuggets", "Pan Pizza", "Patacones", "Pizza"]
+    
     
     //MARK: - View Did Load
     override func viewDidLoad() {
@@ -37,6 +40,13 @@ class DishDetailViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         setup(with: selectedDetail!)
         formatDate(dateToUse: HomeViewController.selectedDate!)
+        textField.delegate = self
+        
+        for dish in populars {
+            if selectedDetail?.name == dish {
+                textField.placeholder = "No available sides for this dish‼️"
+            }
+        }
         
     }
     //MARK: - Poblar la pantalla con los datos
@@ -65,13 +75,24 @@ class DishDetailViewController: UIViewController {
     
     //MARK: - Compra y exportación de datos a Firestore
     @IBAction func purchaseTapped(_ sender: Any) {
-        self.alert()
+        if textField.text == "".trimmingCharacters(in: .whitespacesAndNewlines) {
+            self.alert(wroteText: false)
+        } else {
+            self.alert(wroteText: true)
+        }
+        
     }
     
-    func alert() {
+    func alert(wroteText: Bool) {
+        var alert = UIAlertController()
         
-        let alert = UIAlertController(title: "Are you sure you want to eat this on \(internalFormattedDate ?? "the selected date")?", message: "", preferredStyle: .alert)
-        let proceedAction = UIAlertAction(title: "Yes, Proceed to Checkout", style: .default) { alertAction in
+        if wroteText == false {
+            alert = UIAlertController(title: "Are you sure you want to eat this on \(internalFormattedDate ?? "the selected date"), and leave no notes for your order?", message: "", preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: "Are you sure you want to eat this on \(internalFormattedDate ?? "the selected date")?", message: "", preferredStyle: .alert)
+        }
+            
+                let proceedAction = UIAlertAction(title: "Yes, Proceed to Checkout", style: .default) { alertAction in
             self.paymentHandler.startPayment(product: self.selectedDetail!) { success in
                 self.paymentSuccess = success
                 if success == true {
@@ -122,7 +143,8 @@ class DishDetailViewController: UIViewController {
                                 "uid" : Auth.auth().currentUser!.uid,
                                 "orderId" : orderNum + 1,
                                 "Retirado" : false,
-                                "imageURL": self.selectedDetail?.imageURL
+                                "imageURL": self.selectedDetail?.imageURL,
+                                "details" : textField.text ?? ""
                             ])
                             { error in
                                 if let e = error {
@@ -176,5 +198,16 @@ class DishDetailViewController: UIViewController {
     }
 }
 
+extension DishDetailViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let curruntCharachterCount = textField.text?.count ?? 0
+                if range.length + range.location > curruntCharachterCount{
+                    return false
+                }
+                let newLength = curruntCharachterCount + string.count - range.length
+                return newLength <= 45 // set max limit of numbers
+    }
+}
 
 

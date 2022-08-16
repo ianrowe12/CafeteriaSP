@@ -27,6 +27,10 @@ class SettingsEditorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        textField.delegate = self
+        
+        
         textField.placeholder = "Enter your new \(settingsDict[propertyBeingEdited!] ?? "value")"
         
         if propertyBeingEdited == K.settingsLabels.password {
@@ -141,5 +145,27 @@ class SettingsEditorViewController: UIViewController {
     }
     
     
-
+    
 }
+
+extension SettingsEditorViewController: UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        
+        
+        let curruntCharachterCount = textField.text?.count ?? 0
+        if range.length + range.location > curruntCharachterCount{
+            return false
+        }
+        let newLength = curruntCharachterCount + string.count - range.length
+        
+        
+        
+        if propertyBeingEdited == K.settingsLabels.id {
+            return newLength <= 6 // set max limit of numbers
+        } else {
+            return newLength <= 50
+        }
+    }
+}
+

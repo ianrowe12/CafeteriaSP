@@ -38,7 +38,7 @@ class PaymentHandler: NSObject {
         paymentRequest.merchantCapabilities = .capabilityCredit
         paymentRequest.merchantCapabilities = .capabilityDebit
         paymentRequest.countryCode = "US"
-        paymentRequest.currencyCode = "CRC"
+        paymentRequest.currencyCode = "USD"
         paymentRequest.supportedNetworks = PaymentHandler.supportedNetworks
         paymentRequest.shippingType = .storePickup
         
