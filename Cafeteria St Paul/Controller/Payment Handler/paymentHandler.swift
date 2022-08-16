@@ -15,7 +15,7 @@ class PaymentHandler: NSObject {
         .masterCard,
         .amex,
         .vPay,
-        .discover
+        .discover,
     ]
     
     func startPayment(product: Dish, completion: @escaping PaymentCompletionHandler) {
@@ -34,7 +34,7 @@ class PaymentHandler: NSObject {
         let paymentRequest = PKPaymentRequest()
         paymentRequest.paymentSummaryItems = PaymentSummaryItems
         paymentRequest.merchantIdentifier = "merchant.com.ianrowe.cafeteriasp"
-        //paymentRequest.merchantCapabilities = .capability3DS
+        paymentRequest.merchantCapabilities = .capability3DS
         paymentRequest.merchantCapabilities = .capabilityCredit
         paymentRequest.merchantCapabilities = .capabilityDebit
         paymentRequest.countryCode = "US"

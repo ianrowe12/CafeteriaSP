@@ -725,6 +725,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2V636U3DWT;
+				ENABLE_APP_SANDBOX = NO;
 				INFOPLIST_FILE = "Cafeteria St Paul/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -748,6 +749,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2V636U3DWT;
+				ENABLE_APP_SANDBOX = NO;
 				INFOPLIST_FILE = "Cafeteria St Paul/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

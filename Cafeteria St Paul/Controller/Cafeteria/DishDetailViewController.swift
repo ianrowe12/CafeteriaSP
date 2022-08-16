@@ -96,7 +96,8 @@ class DishDetailViewController: UIViewController {
             self.paymentHandler.startPayment(product: self.selectedDetail!) { success in
                 self.paymentSuccess = success
                 if success == true {
-                    self.sendOrder() //Si el completion handler de la compra da positivo entonces:
+                    //Si el completion handler de la compra da positivo entonces:
+                    self.sendOrder()
                 } else {
                     ProgressHUD.showError("The payment could not be processed")
                 }
@@ -152,6 +153,7 @@ class DishDetailViewController: UIViewController {
                                     print(e)
                                 } else {
                                     ProgressHUD.showSuccess("Order placed Succesfully")
+                                    self.paymentHandler.paymentStatus = .failure
                                 }
                             }
                         }
@@ -161,22 +163,6 @@ class DishDetailViewController: UIViewController {
             }
         }
         
-        //        self.getFromUsersCollection() { [self] username, id in
-        //            self.db.collection("orders").document((Auth.auth().currentUser!.uid)).collection("2022").addDocument(data: [
-        //                "Carné" : id,
-        //                "Nombre" : username,
-        //                "Date" : self.formattedDate!,
-        //                "Platillo": self.selectedDetail?.name ?? "error",
-        //                "Interval": self.intervalDate!
-        //            ]) { error in
-        //                if let e = error {
-        //                    ProgressHUD.showError("Error while placing your order")
-        //                    print(e)
-        //                } else {
-        //                    ProgressHUD.showSuccess("Order placed Succesfully")
-        //                }
-        //            }
-        //        }
     }
     
     
