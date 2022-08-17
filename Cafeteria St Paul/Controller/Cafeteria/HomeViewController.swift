@@ -31,6 +31,8 @@ class HomeViewController: UIViewController {
     
     let db = Firestore.firestore()
     
+    let lastDayOfSchool = "29/11/2022"
+    
     
     //MARK: - View Will Dissappear
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,6 +44,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Cafeteria"
+        
+        formatter.dateFormat = "dd/MM/yyyy"
         
         HomeViewController.selectedDate = calendar.startOfDay(for: Date().addingTimeInterval(24*60*60)) //Sets default selected date for tomorrow at 00:00:00
         
@@ -56,10 +60,15 @@ class HomeViewController: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         datePicker.minimumDate = Date().addingTimeInterval(24*60*60) //The minumum date to pick is tomorrow.
+        if Date().addingTimeInterval(24*60*60*30).timeIntervalSince1970 < formatter.date(from: lastDayOfSchool)!.timeIntervalSince1970 {
+            datePicker.maximumDate = Date().addingTimeInterval(24*60*60*30)
+            
+        } else {
+            datePicker.maximumDate = formatter.date(from: lastDayOfSchool)!
+        }
         
         registerCells()
         
-        formatter.dateFormat = "dd/MM/yyyy"
         stringedDate = formatter.string(from: HomeViewController.selectedDate!)
         print(stringedDate!)
         

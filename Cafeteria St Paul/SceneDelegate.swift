@@ -23,20 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         var controller: UIViewController!
         
-        //        Auth.auth().addStateDidChangeListener { <#Auth#>, <#User?#> in
-        //            <#code#>
-        //        }
-        //        Auth.auth().addStateDidChangeListener { [weak self] (_, user) in
-        //            if user != nil && UserDefaults.standard.bool(forKey: "wantsSessionPersistence") == true {
-        //                controller = storyBoard.instantiateViewController(withIdentifier: "homeTabController") as! UITabBarController
-        //            } else {
-        //                if UserDefaults.standard.notFirstTime {
-        //                    controller = storyBoard.instantiateViewController(withIdentifier: "firstNav") as! UINavigationController
-        //                } else {
-        //                    controller = storyBoard.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
-        //                }
-        //            }
-        //        }        
         
         if UserDefaults.standard.notFirstTime {
             if UserDefaults.standard.bool(forKey: "wantsSessionPersistence") == true {

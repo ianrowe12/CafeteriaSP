@@ -11,7 +11,8 @@ target 'Cafeteria St Paul' do
   #  pod 'Firebase/Analytics'
   #  pod 'Firebase/Crashlytics'
     pod 'IQKeyboardManagerSwift'
+    pod 'Kingfisher', '7.3.2'
     pod 'ProgressHUD'
-    pod 'Kingfisher'
+
 
 end
