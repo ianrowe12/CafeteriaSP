@@ -93,16 +93,7 @@ class DishDetailViewController: UIViewController {
         }
             
                 let proceedAction = UIAlertAction(title: "Yes, Proceed to Checkout", style: .default) { alertAction in
-            self.paymentHandler.startPayment(product: self.selectedDetail!) { success in
-                self.paymentSuccess = success
-                if success == true {
-                    //Si el completion handler de la compra da positivo entonces:
-                    self.sendOrder()
-                } else {
-                    ProgressHUD.showError("The payment could not be processed")
-                }
-                
-            }
+                    self.pay()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { alertAction in
         }
@@ -180,6 +171,19 @@ class DishDetailViewController: UIViewController {
                     completionHandler (username!, id!)
                 }
             }
+        }
+    }
+    func pay() {
+        paymentHandler.startPayment(product: self.selectedDetail!) { success in
+            self.paymentSuccess = success
+            if success == true {
+                //Si el completion handler de la compra da positivo entonces:
+                self.sendOrder()
+
+            } else {
+                ProgressHUD.showError("The payment could not be processed")
+            }
+            
         }
     }
 }

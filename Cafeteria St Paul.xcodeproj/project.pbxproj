@@ -731,6 +731,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OFFERING_APPLE_PAY_BUNDLE_PREFIX = "Ian-Rowe";
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -enable-experimental-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = "Ian-Rowe.Cafeteria-St-Paul";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -755,6 +756,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OFFERING_APPLE_PAY_BUNDLE_PREFIX = "Ian-Rowe";
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -enable-experimental-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = "Ian-Rowe.Cafeteria-St-Paul";
 				PRODUCT_NAME = "$(TARGET_NAME)";

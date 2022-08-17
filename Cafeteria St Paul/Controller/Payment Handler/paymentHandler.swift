@@ -35,12 +35,9 @@ class PaymentHandler: NSObject {
         paymentRequest.paymentSummaryItems = PaymentSummaryItems
         paymentRequest.merchantIdentifier = "merchant.com.ianrowe.cafeteriasp"
         paymentRequest.merchantCapabilities = .capability3DS
-        paymentRequest.merchantCapabilities = .capabilityCredit
-        paymentRequest.merchantCapabilities = .capabilityDebit
-        paymentRequest.countryCode = "US"
-        paymentRequest.currencyCode = "USD"
+        paymentRequest.countryCode = "CR"
+        paymentRequest.currencyCode = "CRC"
         paymentRequest.supportedNetworks = PaymentHandler.supportedNetworks
-        paymentRequest.shippingType = .storePickup
         
         paymentController = PKPaymentAuthorizationController(paymentRequest: paymentRequest)
         paymentController?.delegate = self
@@ -57,6 +54,7 @@ class PaymentHandler: NSObject {
 
 extension PaymentHandler: PKPaymentAuthorizationControllerDelegate {
     func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+        
         let errors = [Error]()
         let status = PKPaymentAuthorizationStatus.success
         
