@@ -33,7 +33,7 @@ class PaymentHandler: NSObject {
         
         let paymentRequest = PKPaymentRequest()
         paymentRequest.paymentSummaryItems = PaymentSummaryItems
-        paymentRequest.merchantIdentifier = "merchant.com.ianrowe.cafeteriasp"
+        paymentRequest.merchantIdentifier = "merchant.com.ianrowe.cafeteriastpaul"
         paymentRequest.merchantCapabilities = .capability3DS
         paymentRequest.countryCode = "CR"
         paymentRequest.currencyCode = "CRC"
