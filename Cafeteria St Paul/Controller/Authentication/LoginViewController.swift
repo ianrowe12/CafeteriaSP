@@ -15,8 +15,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     
+    let db = Firestore.firestore()
     var nextViewIsHome = false
     let defaults = UserDefaults.standard
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +68,26 @@ class LoginViewController: UIViewController {
                     Haptics.errorVibration()
                     ProgressHUD.showError(e.localizedDescription)
                 } else {
-                    self.staySignedInAlert()
+                    self.db.collection("users").document(Auth.auth().currentUser!.uid).getDocument { documentSnapshot, error in
+                        if error != nil {
+                            print("THERE WAS AN ERROR \(error!.localizedDescription)")
+                        } else {
+                            if let data = documentSnapshot?.data(){
+                                if let status = data["activated"] as? Bool {
+                                    if status == false {
+                                        ProgressHUD.showError("You haven't activated your account yet")
+                                        do {
+                                            try Auth.auth().signOut()
+                                        } catch let signOutError as NSError {
+                                            print("Error signing out: %@", signOutError)
+                                        }
+                                    } else {
+                                        self.staySignedInAlert()
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

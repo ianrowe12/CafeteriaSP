@@ -22,8 +22,6 @@ class DishDetailViewController: UIViewController {
     var formattedDate: String?
     var intervalDate: Double?
     
-    var paymentHandler = PaymentHandler()
-    var paymentSuccess = false
     
     var internalFormattedDate: String? //This one will be used for the alert to let users know the time for which they're buying
     
@@ -91,15 +89,29 @@ class DishDetailViewController: UIViewController {
         } else {
             alert = UIAlertController(title: "Are you sure you want to eat this on \(internalFormattedDate ?? "the selected date")?", message: "", preferredStyle: .alert)
         }
-            
-                let proceedAction = UIAlertAction(title: "Yes, Proceed to Checkout", style: .default) { alertAction in
-                    self.pay()
+        
+        let proceedAction = UIAlertAction(title: "Yes", style: .default) { alertAction in
+            self.warningAlert()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { alertAction in
         }
         alert.addAction(proceedAction)
         alert.addAction(cancelAction)
         
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func warningAlert() {
+        
+        let alert = UIAlertController(title: "Warning", message: "Since the cafeteria might buy the ingredients beforehand to fulfill your order, there is NO way to cancel it once you've placed it.", preferredStyle: .alert)
+        
+        let placeOrderAction = UIAlertAction(title: "Place Order", style: .default) { alertAction in
+            self.sendOrder()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { alertAction in
+        }
+        alert.addAction(placeOrderAction)
+        alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
     
@@ -144,7 +156,6 @@ class DishDetailViewController: UIViewController {
                                     print(e)
                                 } else {
                                     ProgressHUD.showSuccess("Order placed Succesfully")
-                                    self.paymentHandler.paymentStatus = .failure
                                 }
                             }
                         }
@@ -157,7 +168,7 @@ class DishDetailViewController: UIViewController {
     }
     
     
-    func getFromUsersCollection(completionHandler:@escaping(String, String) -> ()){
+    func getFromUsersCollection(completionHandler:@escaping(String, Int) -> ()){
         db.collection("users").document(Auth.auth().currentUser!.uid).getDocument { documentSnapshot, error in
             if error != nil {
                 
@@ -166,37 +177,25 @@ class DishDetailViewController: UIViewController {
                 if let data = documentSnapshot?.data(){
                     
                     let username = data["name"] as? String
-                    let id = data["studentID"] as? String
+                    let id = data["studentID"] as? Int
                     
                     completionHandler (username!, id!)
                 }
             }
         }
     }
-    func pay() {
-        paymentHandler.startPayment(product: self.selectedDetail!) { success in
-            self.paymentSuccess = success
-            if success == true {
-                //Si el completion handler de la compra da positivo entonces:
-                self.sendOrder()
 
-            } else {
-                ProgressHUD.showError("The payment could not be processed")
-            }
-            
-        }
-    }
 }
 
 extension DishDetailViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let curruntCharachterCount = textField.text?.count ?? 0
-                if range.length + range.location > curruntCharachterCount{
-                    return false
-                }
-                let newLength = curruntCharachterCount + string.count - range.length
-                return newLength <= 45 // set max limit of numbers
+        if range.length + range.location > curruntCharachterCount{
+            return false
+        }
+        let newLength = curruntCharachterCount + string.count - range.length
+        return newLength <= 45 // set max limit of numbers
     }
 }
 

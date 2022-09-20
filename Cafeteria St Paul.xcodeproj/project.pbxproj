@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6D70BFF1DFC2D5ED327AAB11 /* Pods_Cafeteria_St_Paul.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EE7AF04BC82C43D5E569FCC /* Pods_Cafeteria_St_Paul.framework */; };
-		790A6D0D289F357B006C6D89 /* paymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790A6D0C289F357B006C6D89 /* paymentHandler.swift */; };
 		7917A5F5284A243C0094FCD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7917A5F4284A243C0094FCD3 /* LaunchScreen.storyboard */; };
 		7917A5F8284A2EC00094FCD3 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7917A5F7284A2EC00094FCD3 /* Haptics.swift */; };
 		793927DC283F91B5004E7D97 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793927DA283F91B5004E7D97 /* CategoryCollectionViewCell.swift */; };
@@ -28,6 +27,8 @@
 		7963999726C6D76F0056BD4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7963999526C6D76F0056BD4B /* Main.storyboard */; };
 		7963999926C6D7710056BD4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7963999826C6D7710056BD4B /* Assets.xcassets */; };
 		796DEC252859252C003E8085 /* categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796DEC242859252C003E8085 /* categories.swift */; };
+		797A89BE28D2C25B0060045B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797A89BD28D2C25B0060045B /* User.swift */; };
+		797A89C028D2C36B0060045B /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797A89BF28D2C36B0060045B /* Users.swift */; };
 		797F88C12870CA970097236F /* SettingsEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797F88C02870CA970097236F /* SettingsEditorViewController.swift */; };
 		7983B07C2860C49F00027340 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7983B07A2860C49F00027340 /* SettingsTableViewCell.xib */; };
 		798F36EE2869C6E100800EFB /* OrdersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798F36ED2869C6E100800EFB /* OrdersListViewController.swift */; };
@@ -62,8 +63,6 @@
 
 /* Begin PBXFileReference section */
 		5EE7AF04BC82C43D5E569FCC /* Pods_Cafeteria_St_Paul.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cafeteria_St_Paul.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		790A6D0A289F3536006C6D89 /* Cafeteria St Paul.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cafeteria St Paul.entitlements"; sourceTree = "<group>"; };
-		790A6D0C289F357B006C6D89 /* paymentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paymentHandler.swift; sourceTree = "<group>"; };
 		7917A5F4284A243C0094FCD3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7917A5F7284A2EC00094FCD3 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		793927DA283F91B5004E7D97 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -85,6 +84,8 @@
 		7963999826C6D7710056BD4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7963999D26C6D7710056BD4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		796DEC242859252C003E8085 /* categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = categories.swift; sourceTree = "<group>"; };
+		797A89BD28D2C25B0060045B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		797A89BF28D2C36B0060045B /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		797F88C02870CA970097236F /* SettingsEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEditorViewController.swift; sourceTree = "<group>"; };
 		7983B07A2860C49F00027340 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
 		798F36ED2869C6E100800EFB /* OrdersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersListViewController.swift; sourceTree = "<group>"; };
@@ -131,14 +132,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		790A6D0B289F3570006C6D89 /* Payment Handler */ = {
-			isa = PBXGroup;
-			children = (
-				790A6D0C289F357B006C6D89 /* paymentHandler.swift */,
-			);
-			path = "Payment Handler";
-			sourceTree = "<group>";
-		};
 		7917A5F6284A2EB10094FCD3 /* Haptics */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,9 +218,9 @@
 			isa = PBXGroup;
 			children = (
 				7963998E26C6D76F0056BD4B /* Cafeteria St Paul */,
-				7963998D26C6D76F0056BD4B /* Products */,
-				C7445B03E47A12BA4E07E10C /* Pods */,
 				C1B582C6ADF8564964DB1548 /* Frameworks */,
+				C7445B03E47A12BA4E07E10C /* Pods */,
+				7963998D26C6D76F0056BD4B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -242,7 +235,6 @@
 		7963998E26C6D76F0056BD4B /* Cafeteria St Paul */ = {
 			isa = PBXGroup;
 			children = (
-				790A6D0A289F3536006C6D89 /* Cafeteria St Paul.entitlements */,
 				7917A5F6284A2EB10094FCD3 /* Haptics */,
 				795263FB2840E1B40084E58F /* Extensions */,
 				793927D7283F9144004E7D97 /* CustomViews */,
@@ -265,6 +257,7 @@
 				796DEC242859252C003E8085 /* categories.swift */,
 				79502B5328622301004A5981 /* SettingsList.swift */,
 				79FC60BE2872356E0094C448 /* welcomePages.swift */,
+				797A89BF28D2C36B0060045B /* Users.swift */,
 			);
 			path = Brain;
 			sourceTree = "<group>";
@@ -328,6 +321,7 @@
 				79502B5128622085004A5981 /* Setting.swift */,
 				798F36F42869D2F700800EFB /* Order.swift */,
 				79FC60BC287234EE0094C448 /* WelcomePage.swift */,
+				797A89BD28D2C25B0060045B /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -344,7 +338,6 @@
 		79AC2F4126C6DBA500D88FB5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				790A6D0B289F3570006C6D89 /* Payment Handler */,
 				79FC60B8287230990094C448 /* Welcome */,
 				799F9F3E2841309A00414BB0 /* Authentication */,
 				79B9362D28575030009373C8 /* Profile Settings */,
@@ -557,6 +550,7 @@
 				7949337E284514DB0038910F /* UIVIews+Extension.swift in Sources */,
 				799F9F40284130E100414BB0 /* DishesListViewController.swift in Sources */,
 				7963999226C6D76F0056BD4B /* SceneDelegate.swift in Sources */,
+				797A89C028D2C36B0060045B /* Users.swift in Sources */,
 				799B1CD6283FFF5600314981 /* Dish.swift in Sources */,
 				79526406284100580084E58F /* DishDetailViewController.swift in Sources */,
 				793927DF283F930C004E7D97 /* DishCategory.swift in Sources */,
@@ -568,9 +562,9 @@
 				79AC2F4326C6EB3D00D88FB5 /* RegisterViewController.swift in Sources */,
 				79502B5228622085004A5981 /* Setting.swift in Sources */,
 				79FC60BF2872356E0094C448 /* welcomePages.swift in Sources */,
-				790A6D0D289F357B006C6D89 /* paymentHandler.swift in Sources */,
 				799B1CD3283FFD5500314981 /* DishCell.swift in Sources */,
 				793BC7D1284180F7009E3FF5 /* WebViewController.swift in Sources */,
+				797A89BE28D2C25B0060045B /* User.swift in Sources */,
 				79FC60BD287234EE0094C448 /* WelcomePage.swift in Sources */,
 				793927DC283F91B5004E7D97 /* CategoryCollectionViewCell.swift in Sources */,
 				79FC60BA287230BE0094C448 /* WelcomeViewController.swift in Sources */,
@@ -721,9 +715,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Cafeteria St Paul/Cafeteria St Paul.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution: Ian Phillip Rowe Rojas (2V636U3DWT)";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2V636U3DWT;
 				ENABLE_APP_SANDBOX = NO;
@@ -733,11 +727,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2;
-				OFFERING_APPLE_PAY_BUNDLE_PREFIX = "Ian-Rowe";
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -enable-experimental-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = "Ian-Rowe.Cafeteria-St-Paul";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "The profile for XCode 1";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -749,9 +742,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Cafeteria St Paul/Cafeteria St Paul.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution: Ian Phillip Rowe Rojas (2V636U3DWT)";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 2V636U3DWT;
 				ENABLE_APP_SANDBOX = NO;
@@ -761,11 +754,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2;
-				OFFERING_APPLE_PAY_BUNDLE_PREFIX = "Ian-Rowe";
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -enable-experimental-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = "Ian-Rowe.Cafeteria-St-Paul";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "The profile for XCode 1";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
