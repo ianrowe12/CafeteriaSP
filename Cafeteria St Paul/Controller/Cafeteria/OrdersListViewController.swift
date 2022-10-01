@@ -65,8 +65,7 @@ class OrdersListViewController: UIViewController {
                                 let data = doc.data()
                                 if let dish = data["Platillo"] as? String, let date = data["Date"] as? String, let interval = data["Interval"] as? Double, let orderNum = orderNUMBER as? String, let userName = data["Nombre"] as? String, let image = data["imageURL"] as? String {
                                     print("OK3")
-                                    if interval > Date().timeIntervalSince1970 - 60*60*14 { //Make sure only pending orders are showing. They wont be shown if they're older than yesterday (60*60*14).
-//                                        let order = Order(dish: DishDictionary.myDict[dish]!, date: date, orderNum: orderNum, userName: userName)
+                                    if interval > Date().timeIntervalSince1970 - 60*60*14 {
                                         let order = Order(date: date, orderNum: orderNum, userName: userName, dishName: dish, imageURL: image)
                                         
                                         self.orders.append(order)

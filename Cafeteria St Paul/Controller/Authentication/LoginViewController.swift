@@ -83,6 +83,7 @@ class LoginViewController: UIViewController {
                                         }
                                     } else {
                                         self.staySignedInAlert()
+                                        // inicia la alerta que le preguna al usuario si desea mantener su sesión iniciada o no.
                                     }
                                 }
                             }

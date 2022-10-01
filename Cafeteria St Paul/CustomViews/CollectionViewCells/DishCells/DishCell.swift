@@ -18,8 +18,8 @@ class DishCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
+    
     func setup(withTheDish popularDish: Dish) {
         titleLabel.text = popularDish.name
         priceLabel.text = popularDish.price

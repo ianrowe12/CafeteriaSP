@@ -119,7 +119,7 @@ class HomeViewController: UIViewController {
         bringDishes4Date(date: forDate, fromCollection: "Lunch") { [self] lunches in
             bringDishes(fromCollection: "popularDishes", whereField: "name", has:  ["Fries & Nuggets", "Pan Pizza", "Patacones", "French Fries"]) { [self] dishList in
                 
-            
+                
                 FilteredPopular = dishList
                 
                 if currentWeekDay == 6 {
@@ -151,68 +151,32 @@ class HomeViewController: UIViewController {
         completionHandler(FilteredPopular, FilteredBreakfast, FilteredSpecial, FilteredSnackSalado)
         
     }
-
-
-
-
-func bringDishes(fromCollection: String, whereField: String, has: [String], completionHandler: @escaping([Dish]) -> Void){
     
-    var dishList: [Dish] = []
-    let currentWeekDay = Calendar.current.component(.weekday, from: HomeViewController.selectedDate!)
-    db.collection("Dishes").document("All").collection(fromCollection).whereField(whereField, in: has).getDocuments { querySnapshot, error in
-        if error != nil {
-            ProgressHUD.showError(error?.localizedDescription)
-        } else {
-            if let firestoreDocuments = querySnapshot?.documents {
-                if firestoreDocuments == [] || currentWeekDay == 1 || currentWeekDay == 7 {
-                    ProgressHUD.showError("No dishes available on weekends")
-                    dishList = []
-                    DispatchQueue.main.async {
-                        self.popularDishesView.reloadData()
-                        self.specialDishesView.reloadData()
-                    }
-                } else {
-                    for doc in firestoreDocuments {
-                        let data = doc.data()
-                        if let description = data["Description"] as? String, let imageurl = data["imageURL"] as? String, let name = data["name"] as? String, let price = data["price"] as? String {
-                            let dish = Dish(name: name, imageURL: imageurl, price: price, description: description)
-                            
-                            dishList.append(dish)
-                            
-                            DispatchQueue.main.async {
-                                self.popularDishesView.reloadData()
-                                self.specialDishesView.reloadData()
-                            }
-                        }
-                    }
-                    ProgressHUD.dismiss()
-                }
-            }
-            
-            completionHandler(dishList)
-        }
-    }
-}
-
-func bringDishes4Date(date: String, fromCollection: String ,completionHandler: @escaping([Dish]) -> Void){
     
-    var dishList: [Dish] = []
-    let currentWeekDay = Calendar.current.component(.weekday, from: HomeViewController.selectedDate!)
-    db.collection("Dishes").document("All").collection(fromCollection).whereField("dates", arrayContainsAny: [date]).getDocuments { querySnapshot, error in
-        if error != nil {
-            ProgressHUD.showError(error?.localizedDescription)
-        } else {
-            if currentWeekDay == 1 || currentWeekDay == 7 {
-                ProgressHUD.showError("No dishes available on weekends")
+    
+    
+    func bringDishes(fromCollection: String, whereField: String, has: [String], completionHandler: @escaping([Dish]) -> Void){
+        
+        var dishList: [Dish] = []
+        let currentWeekDay = Calendar.current.component(.weekday, from: HomeViewController.selectedDate!)
+        db.collection("Dishes").document("All").collection(fromCollection).whereField(whereField, in: has).getDocuments { querySnapshot, error in
+            if error != nil {
+                ProgressHUD.showError(error?.localizedDescription)
             } else {
                 if let firestoreDocuments = querySnapshot?.documents {
-                    if firestoreDocuments == [] {
-                        ProgressHUD.dismiss()
+                    if firestoreDocuments == [] || currentWeekDay == 1 || currentWeekDay == 7 {
+                        ProgressHUD.showError("No dishes available on weekends")
+                        dishList = []
+                        DispatchQueue.main.async {
+                            self.popularDishesView.reloadData()
+                            self.specialDishesView.reloadData()
+                        }
                     } else {
                         for doc in firestoreDocuments {
                             let data = doc.data()
                             if let description = data["Description"] as? String, let imageurl = data["imageURL"] as? String, let name = data["name"] as? String, let price = data["price"] as? String {
                                 let dish = Dish(name: name, imageURL: imageurl, price: price, description: description)
+                                
                                 dishList.append(dish)
                                 
                                 DispatchQueue.main.async {
@@ -224,47 +188,83 @@ func bringDishes4Date(date: String, fromCollection: String ,completionHandler: @
                         ProgressHUD.dismiss()
                     }
                 }
+                
+                completionHandler(dishList)
             }
-            completionHandler(dishList)
         }
-    }
-}
-
-
-
-
-
-
-//MARK: - Registering cells
-
-private func registerCells() {
-    categoryCollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
-    popularDishesView.register(UINib(nibName: "DishCell", bundle: nil), forCellWithReuseIdentifier: "DishCell")
-    specialDishesView.register(UINib(nibName: "SpecialDishCell", bundle: nil), forCellWithReuseIdentifier: "SpecialDishCell")
-}
-
-//MARK: - Preparing for segue
-
-
-override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "showDetails" {
-        let destinationVC = segue.destination as! DishDetailViewController
-        if let indexPath = popularDishesView.indexPathsForSelectedItems?.first {
-            destinationVC.selectedDetail = FilteredPopular[indexPath.row]
-        } else if let indexPath = specialDishesView.indexPathsForSelectedItems?.first{
-            destinationVC.selectedDetail = FilteredSpecial[indexPath.row]
-        }
-    } else if segue.identifier == "showList" {
-        let destinationVC = segue.destination as! DishesListViewController
-        if let indexPath = categoryCollectionView.indexPathsForSelectedItems?.first {
-            destinationVC.currentCategory = Categories.categories[indexPath.row]
-        }
-    } else {
-        _ = segue.destination as! OrdersListViewController
-        
     }
     
-}
+    func bringDishes4Date(date: String, fromCollection: String ,completionHandler: @escaping([Dish]) -> Void){
+        
+        var dishList: [Dish] = []
+        let currentWeekDay = Calendar.current.component(.weekday, from: HomeViewController.selectedDate!)
+        db.collection("Dishes").document("All").collection(fromCollection).whereField("dates", arrayContainsAny: [date]).getDocuments { querySnapshot, error in
+            if error != nil {
+                ProgressHUD.showError(error?.localizedDescription)
+            } else {
+                if currentWeekDay == 1 || currentWeekDay == 7 {
+                    ProgressHUD.showError("No dishes available on weekends")
+                } else {
+                    if let firestoreDocuments = querySnapshot?.documents {
+                        if firestoreDocuments == [] {
+                            ProgressHUD.dismiss()
+                        } else {
+                            for doc in firestoreDocuments {
+                                let data = doc.data()
+                                if let description = data["Description"] as? String, let imageurl = data["imageURL"] as? String, let name = data["name"] as? String, let price = data["price"] as? String {
+                                    let dish = Dish(name: name, imageURL: imageurl, price: price, description: description)
+                                    dishList.append(dish)
+                                    
+                                    DispatchQueue.main.async {
+                                        self.popularDishesView.reloadData()
+                                        self.specialDishesView.reloadData()
+                                    }
+                                }
+                            }
+                            ProgressHUD.dismiss()
+                        }
+                    }
+                }
+                completionHandler(dishList)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    //MARK: - Registering cells
+    
+    private func registerCells() {
+        categoryCollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+        popularDishesView.register(UINib(nibName: "DishCell", bundle: nil), forCellWithReuseIdentifier: "DishCell")
+        specialDishesView.register(UINib(nibName: "SpecialDishCell", bundle: nil), forCellWithReuseIdentifier: "SpecialDishCell")
+    }
+    
+    //MARK: - Preparing for segue
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetails" {
+            let destinationVC = segue.destination as! DishDetailViewController
+            if let indexPath = popularDishesView.indexPathsForSelectedItems?.first {
+                destinationVC.selectedDetail = FilteredPopular[indexPath.row]
+            } else if let indexPath = specialDishesView.indexPathsForSelectedItems?.first{
+                destinationVC.selectedDetail = FilteredSpecial[indexPath.row]
+            }
+        } else if segue.identifier == "showList" {
+            let destinationVC = segue.destination as! DishesListViewController
+            if let indexPath = categoryCollectionView.indexPathsForSelectedItems?.first {
+                destinationVC.currentCategory = Categories.categories[indexPath.row]
+            }
+        } else {
+            _ = segue.destination as! OrdersListViewController
+            
+        }
+        
+    }
 }
 
 

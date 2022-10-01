@@ -6,6 +6,11 @@ struct Dish {
     let imageURL: String
     let price: String
     let description: String
+}
+
+
+
+
+
 //    let dayOfWeek: [Int]
 //    let date: [String]
-}

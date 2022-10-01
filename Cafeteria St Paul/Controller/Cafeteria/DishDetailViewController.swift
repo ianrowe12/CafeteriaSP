@@ -100,7 +100,8 @@ class DishDetailViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-    
+
+        
     func warningAlert() {
         
         let alert = UIAlertController(title: "Warning", message: "Since the cafeteria might buy the ingredients beforehand to fulfill your order, there is NO way to cancel it once you've placed it.", preferredStyle: .alert)
@@ -114,13 +115,11 @@ class DishDetailViewController: UIViewController {
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
-    
+
     
     func sendOrder()  {
         ProgressHUD.show("Placing Order...🧑‍🍳")
         //var orderId: Int = 0
-        
-        
         self.db.collection("orders2").order(by: "orderId", descending: true).limit(to: 1).getDocuments { querySnapshot, error in
             if error != nil {
                 print("There was an error retrieving the order from Firestore: \(error). Simple error description: \(error!.localizedDescription)")
@@ -166,6 +165,7 @@ class DishDetailViewController: UIViewController {
         }
         
     }
+
     
     
     func getFromUsersCollection(completionHandler:@escaping(String, Int) -> ()){

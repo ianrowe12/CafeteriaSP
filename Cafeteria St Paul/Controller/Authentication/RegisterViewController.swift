@@ -16,7 +16,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var createAccountButton: UIButton!
     
-    //var userNum = 0
+    var userNum = 0
     let db = Firestore.firestore()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,7 +70,7 @@ class RegisterViewController: UIViewController {
         let action = UIAlertAction(title: "Confirm", style: .default) { alertAction in
             
             if alertTextField.text != nil || alertTextField.text != "".trimmingCharacters(in: .whitespacesAndNewlines) {
-                self.changeEmail(newValue: alertTextField.text!, password: passwordEntered)
+                self.changePassword(newValue: alertTextField.text!, password: passwordEntered)
             }
         }
         
@@ -78,7 +78,7 @@ class RegisterViewController: UIViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-    func changeEmail(newValue: String, password: String) {
+    func changePassword(newValue: String, password: String) {
         var credential: AuthCredential
         let currentUserEmail = Auth.auth().currentUser?.email
         credential = EmailAuthProvider.credential(withEmail: currentUserEmail!, password: password) //Se declara despues para primero darle un valor a "current user email" y que no sea tan largo
@@ -91,7 +91,7 @@ class RegisterViewController: UIViewController {
                     ProgressHUD.showError(e.localizedDescription)
                     Haptics.errorVibration()
                 } else {
-                    print("HERES THE REAUTHENTICATION RESULT \(reauthenticationResult)")
+                    print("HERES THE REAUTHENTICATION RESULT \(reauthenticationResult!)")
                         user.updatePassword(to: newValue) { (error) in
                             if error != nil {
                                 ProgressHUD.showError(error?.localizedDescription)
@@ -134,15 +134,13 @@ class RegisterViewController: UIViewController {
         var user = Users.AllUsers[userNum]
         let db = Firestore.firestore()
         DispatchQueue.main.async {
-                if self.nameField.text == "" || self.studentIDField.text == "" {
                     let email = user.email.trimmingCharacters(in: .whitespacesAndNewlines)
                     let password = "@**\(user.carne)**@"
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                         
                         if let e = error {
-                            self.errorLabel.text = "Error: \(e.localizedDescription)"
                             Haptics.errorVibration()
-                            ProgressHUD.showError()
+                            ProgressHUD.showError(e.localizedDescription)
                             
                         } else {
                             db.collection("users").document(authResult!.user.uid).setData(
@@ -156,9 +154,8 @@ class RegisterViewController: UIViewController {
                             )
                             { error in
                                 if error != nil {
-                                    self.errorLabel.text = error?.localizedDescription
                                     Haptics.errorVibration()
-                                    ProgressHUD.showError()
+                                    ProgressHUD.showError(error?.localizedDescription)
                                 } else {
                                     sleep(1)
                                     self.userNum += 1
@@ -171,6 +168,5 @@ class RegisterViewController: UIViewController {
                     }
                 }
             }
-    }
      */
 }
