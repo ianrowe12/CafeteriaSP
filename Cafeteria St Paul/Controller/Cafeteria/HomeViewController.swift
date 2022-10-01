@@ -118,8 +118,6 @@ class HomeViewController: UIViewController {
         
         bringDishes4Date(date: forDate, fromCollection: "Lunch") { [self] lunches in
             bringDishes(fromCollection: "popularDishes", whereField: "name", has:  ["Fries & Nuggets", "Pan Pizza", "Patacones", "French Fries"]) { [self] dishList in
-                
-                
                 FilteredPopular = dishList
                 
                 if currentWeekDay == 6 {
@@ -140,6 +138,9 @@ class HomeViewController: UIViewController {
         //SPECIAL DISHES
         
         bringDishes4Date(date: forDate, fromCollection: "Lunch") { [self] specialDishesList in
+//            for fakeDish in specialDishesList {
+//                fakeDish.imageURL = "https://firebasestorage.googleapis.com/v0/b/cafeteria-st-paul.appspot.com/o/Imagen_no_disponible.svg.png?alt=media&token=dd4c889f-12b4-4d0e-ac75-78e8340c5b10"
+//            }
             FilteredSpecial = specialDishesList
         }
         
@@ -175,7 +176,7 @@ class HomeViewController: UIViewController {
                         for doc in firestoreDocuments {
                             let data = doc.data()
                             if let description = data["Description"] as? String, let imageurl = data["imageURL"] as? String, let name = data["name"] as? String, let price = data["price"] as? String {
-                                let dish = Dish(name: name, imageURL: imageurl, price: price, description: description)
+                                var dish = Dish(name: name, imageURL: imageurl, price: price, description: description)
                                 
                                 dishList.append(dish)
                                 
@@ -211,8 +212,8 @@ class HomeViewController: UIViewController {
                         } else {
                             for doc in firestoreDocuments {
                                 let data = doc.data()
-                                if let description = data["Description"] as? String, let imageurl = data["imageURL"] as? String, let name = data["name"] as? String, let price = data["price"] as? String {
-                                    let dish = Dish(name: name, imageURL: imageurl, price: price, description: description)
+                                if let description = data["Description"] as? String, /*let imageurl = data["imageURL"] as? String,*/ let name = data["name"] as? String, let price = data["price"] as? String {
+                                    var dish = Dish(name: name, imageURL: /*imageurl*/"https://firebasestorage.googleapis.com/v0/b/cafeteria-st-paul.appspot.com/o/Imagen_no_disponible.svg.png?alt=media&token=dd4c889f-12b4-4d0e-ac75-78e8340c5b10", price: price, description: description)
                                     dishList.append(dish)
                                     
                                     DispatchQueue.main.async {

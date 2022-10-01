@@ -3,7 +3,7 @@ import UIKit
 
 struct Dish {
     let name: String
-    let imageURL: String
+    var imageURL: String
     let price: String
     let description: String
 }
