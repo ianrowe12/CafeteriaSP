@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>467227612415-57mknufifigts63ds4kcvue55v75b5qb.apps.googleusercontent.com</string>
+	<string>467227612415-pboqdp44k4e0n1ep19iq4ntpkt0uiu9v.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.467227612415-57mknufifigts63ds4kcvue55v75b5qb</string>
+	<string>com.googleusercontent.apps.467227612415-pboqdp44k4e0n1ep19iq4ntpkt0uiu9v</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDXfH1GUhE0zocbOyed40k-Aec1o2xA3w0</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>Ian-Rowe.Cafeteria-St-Paul</string>
+	<string>com.Ian-Rowe.Cafeteria-St-PaulMacOs</string>
 	<key>PROJECT_ID</key>
 	<string>cafeteria-st-paul</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:467227612415:ios:90c71d5d4cd5ea423e68ca</string>
+	<string>1:467227612415:ios:9fcbac9cb903f9563e68ca</string>
+	<key>DATABASE_URL</key>
+	<string>https://cafeteria-st-paul-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

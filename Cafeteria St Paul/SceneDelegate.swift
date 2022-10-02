@@ -24,6 +24,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         var controller: UIViewController!
         
         
+#if targetEnvironment(macCatalyst)
+        if UserDefaults.standard.bool(forKey: "wantsSessionPersistence") == true {
+            controller = storyBoard.instantiateViewController(withIdentifier: "homeTabController") as! UITabBarController
+        } else {
+            controller = storyBoard.instantiateViewController(withIdentifier: "firstNav") as! UINavigationController
+        }
+#else
         if UserDefaults.standard.notFirstTime {
             if UserDefaults.standard.bool(forKey: "wantsSessionPersistence") == true {
                 controller = storyBoard.instantiateViewController(withIdentifier: "homeTabController") as! UITabBarController
@@ -33,6 +40,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             controller = storyBoard.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
         }
+#endif
+        
+        //        if UserDefaults.standard.notFirstTime {
+        //            if UserDefaults.standard.bool(forKey: "wantsSessionPersistence") == true {
+        //                controller = storyBoard.instantiateViewController(withIdentifier: "homeTabController") as! UITabBarController
+        //            } else {
+        //                controller = storyBoard.instantiateViewController(withIdentifier: "firstNav") as! UINavigationController
+        //            }
+        //        } else {
+        //            controller = storyBoard.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
+        //        }
         
         if UserDefaults.standard.object(forKey: "darkMode") == nil {
             UserDefaults.standard.setValue(false, forKey: "darkMode")
@@ -49,7 +67,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         SceneDelegate.window?.rootViewController = controller
         SceneDelegate.window?.makeKeyAndVisible()
         //SceneDelegate.window?.overrideUserInterfaceStyle = .light
-                
+        
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

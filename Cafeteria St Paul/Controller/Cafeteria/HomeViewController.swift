@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     
     let lastDayOfSchool = "29/11/2022"
     
+
     
     //MARK: - View Will Dissappear
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,6 +43,8 @@ class HomeViewController: UIViewController {
     //MARK: - View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         
         title = "Cafeteria"
         
@@ -108,32 +111,37 @@ class HomeViewController: UIViewController {
         ProgressHUD.show("Loading Dishes🍴")
         
         //BREAKFAST
-        bringDishes(fromCollection: "Breakfast", whereField: "name", has:  ["Gallo Pinto", "Tortilla con Natilla"]) { [self] breakfastList in
-            FilteredBreakfast = breakfastList
-            
-            Categories.categories[0].dishes = breakfastList //Breakfast
+        Func.bringArray(whichArray: "breakfastsList") { [self] dishes in
+            bringDishes(fromCollection: "Breakfast", whereField: "name", has:  dishes) { [self] breakfastList in
+                FilteredBreakfast = breakfastList
+                Categories.categories[0].dishes = breakfastList //Breakfast
+            }
         }
+        
         
         //LUNCHES AND SALTY SNACKS
         
-        bringDishes4Date(date: forDate, fromCollection: "Lunch") { [self] lunches in
-            bringDishes(fromCollection: "popularDishes", whereField: "name", has:  ["Fries & Nuggets", "Pan Pizza", "Patacones", "French Fries"]) { [self] dishList in
-                FilteredPopular = dishList
-                
-                if currentWeekDay == 6 {
-                    bringDishes(fromCollection: "popularDishes", whereField: "name", has:  ["Pizza"]) { [self] pizza in
-                        Categories.categories[1].dishes?.append(pizza[0])
-                        Categories.categories[2].dishes?.append(pizza[0])
-                        FilteredPopular.append(pizza[0])
+        Func.bringArray(whichArray: "popularsList") { [self] dishes in
+            bringDishes4Date(date: forDate, fromCollection: "Lunch") { [self] lunches in
+                bringDishes(fromCollection: "popularDishes", whereField: "name", has:  dishes) { [self] dishList in
+                    FilteredPopular = dishList
+                    
+                    if currentWeekDay == 6 {
+                        bringDishes(fromCollection: "popularDishes", whereField: "name", has:  ["Pizza"]) { [self] pizza in
+                            Categories.categories[1].dishes?.append(pizza[0])
+                            Categories.categories[2].dishes?.append(pizza[0])
+                            FilteredPopular.append(pizza[0])
+                        }
                     }
+                    
+                    let concatenatedArray = lunches + dishList
+                    Categories.categories[1].dishes = concatenatedArray // Lunch
+                    FilteredPopular = dishList
+                    Categories.categories[2].dishes = dishList// Fast Snacks
                 }
-                
-                let concatenatedArray = lunches + dishList
-                Categories.categories[1].dishes = concatenatedArray // Lunch
-                FilteredPopular = dishList
-                Categories.categories[2].dishes = dishList// Fast Snacks
             }
         }
+        
         
         //SPECIAL DISHES
         
@@ -145,9 +153,12 @@ class HomeViewController: UIViewController {
         }
         
         //DESSERTS
-        bringDishes(fromCollection: "Dessert", whereField: "name", has: ["Pañuelos", "Donuts", "Cachitos"]) { [self] desserts in
-            Categories.categories[3].dishes = desserts // Desserts
+        Func.bringArray(whichArray: "dessertsList") { [self] dishes in
+            bringDishes(fromCollection: "Dessert", whereField: "name", has: dishes) { [self] desserts in
+                Categories.categories[3].dishes = desserts // Desserts
+            }
         }
+        
         
         completionHandler(FilteredPopular, FilteredBreakfast, FilteredSpecial, FilteredSnackSalado)
         

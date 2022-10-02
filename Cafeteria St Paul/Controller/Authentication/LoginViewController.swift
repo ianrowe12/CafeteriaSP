@@ -67,6 +67,9 @@ class LoginViewController: UIViewController {
                     //self.errorLabel.text = e.localizedDescription
                     Haptics.errorVibration()
                     ProgressHUD.showError(e.localizedDescription)
+                    print(e)
+                    self.emailField.text = "error:\(e)"
+                    print(e.localizedDescription)
                 } else {
                     self.db.collection("users").document(Auth.auth().currentUser!.uid).getDocument { documentSnapshot, error in
                         if error != nil {
