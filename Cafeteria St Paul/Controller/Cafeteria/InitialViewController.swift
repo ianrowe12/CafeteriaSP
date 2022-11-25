@@ -66,6 +66,25 @@ class InitialViewController: UIViewController {
 //                }
 //            }
 //        }
+        
+        /*
+        func addType(collection: String, type: String) {
+            
+            db.collection("Dishes").document("All").collection(collection).getDocuments { querySnapshot, error in
+                if error != nil {
+                    ProgressHUD.showError(error?.localizedDescription)
+                } else {
+                    if let firestoreDocs = querySnapshot?.documents {
+                        for doc in firestoreDocs {
+                            var id = doc.documentID
+                            self.db.collection("Dishes").document("All").collection(collection).document(id).setData([
+                                "type" : type
+                            ], merge: true)
+                        }
+                    }
+                }
+            }
+        } */
     }
 
     

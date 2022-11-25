@@ -68,14 +68,15 @@ class LoginViewController: UIViewController {
                     Haptics.errorVibration()
                     ProgressHUD.showError(e.localizedDescription)
                     print(e)
-                    self.emailField.text = "error:\(e)"
+                    print(e.localizedDescription)
+                    print(e)
                     print(e.localizedDescription)
                 } else {
                     self.db.collection("users").document(Auth.auth().currentUser!.uid).getDocument { documentSnapshot, error in
                         if error != nil {
                             print("THERE WAS AN ERROR \(error!.localizedDescription)")
                         } else {
-                            if let data = documentSnapshot?.data(){
+                            if let data = documentSnapshot!.data(){
                                 if let status = data["activated"] as? Bool {
                                     if status == false {
                                         ProgressHUD.showError("You haven't activated your account yet")
@@ -89,7 +90,10 @@ class LoginViewController: UIViewController {
                                         // inicia la alerta que le preguna al usuario si desea mantener su sesión iniciada o no.
                                     }
                                 }
+                            } else {
+                                ProgressHUD.showError("Couln't retrieve data.")
                             }
+                            
                         }
                     }
                 }

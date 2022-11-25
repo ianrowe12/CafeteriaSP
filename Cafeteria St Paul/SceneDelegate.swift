@@ -42,15 +42,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 #endif
         
-        //        if UserDefaults.standard.notFirstTime {
-        //            if UserDefaults.standard.bool(forKey: "wantsSessionPersistence") == true {
-        //                controller = storyBoard.instantiateViewController(withIdentifier: "homeTabController") as! UITabBarController
-        //            } else {
-        //                controller = storyBoard.instantiateViewController(withIdentifier: "firstNav") as! UINavigationController
-        //            }
-        //        } else {
-        //            controller = storyBoard.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
-        //        }
+//        if UserDefaults.standard.notFirstTime {
+//            if UserDefaults.standard.bool(forKey: "wantsSessionPersistence") == true {
+//                controller = storyBoard.instantiateViewController(withIdentifier: "homeTabController") as! UITabBarController
+//            } else {
+//                controller = storyBoard.instantiateViewController(withIdentifier: "firstNav") as! UINavigationController
+//            }
+//        } else {
+//            controller = storyBoard.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
+//        }
         
         if UserDefaults.standard.object(forKey: "darkMode") == nil {
             UserDefaults.standard.setValue(false, forKey: "darkMode")

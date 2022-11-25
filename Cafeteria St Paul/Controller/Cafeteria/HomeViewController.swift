@@ -44,8 +44,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
         title = "Cafeteria"
         
         formatter.dateFormat = "dd/MM/yyyy"
@@ -63,26 +61,20 @@ class HomeViewController: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         datePicker.minimumDate = Date().addingTimeInterval(24*60*60) //The minumum date to pick is tomorrow.
+        
         if Date().addingTimeInterval(24*60*60*30).timeIntervalSince1970 < formatter.date(from: lastDayOfSchool)!.timeIntervalSince1970 {
             datePicker.maximumDate = Date().addingTimeInterval(24*60*60*30)
-            
         } else {
             datePicker.maximumDate = formatter.date(from: lastDayOfSchool)!
-        }
+        } // if today in one month is nearer than the last day school, that'll be the max date, if not, it'll be the last day of school
         
         registerCells()
         
         stringedDate = formatter.string(from: HomeViewController.selectedDate!)
-        print(stringedDate!)
         
         DispatchQueue.main.async {
             self.filterByDate(date: self.stringedDate!)
         }
-        
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        
     }
     
     
@@ -98,13 +90,13 @@ class HomeViewController: UIViewController {
     //MARK: - Variables depending on date
     func filterByDate(date: String) {
         
-        
         populateDishes(forDate: date) { popular, breakfast, special, snacksalado in
             print("Waiting for completion Handler")
         }
-        
     }
-    //MARK: - Bringing Dishes from Firestore
+    
+    
+    //MARK: - Bringing Dishes from Firestore depending on date
     func populateDishes(forDate: String, completionHandler: @escaping([Dish], [Dish], [Dish], [Dish]) -> Void) {
         let currentWeekDay = Calendar.current.component(.weekday, from: HomeViewController.selectedDate!)
         
@@ -112,7 +104,7 @@ class HomeViewController: UIViewController {
         
         //BREAKFAST
         Func.bringArray(whichArray: "breakfastsList") { [self] dishes in
-            bringDishes(fromCollection: "Breakfast", whereField: "name", has:  dishes) { [self] breakfastList in
+            Func.bringDishes(fromCollection: "Breakfast", whereField: "name", has:  dishes, view1: popularDishesView, view2: specialDishesView) { [self] breakfastList in
                 FilteredBreakfast = breakfastList
                 Categories.categories[0].dishes = breakfastList //Breakfast
             }
@@ -122,12 +114,12 @@ class HomeViewController: UIViewController {
         //LUNCHES AND SALTY SNACKS
         
         Func.bringArray(whichArray: "popularsList") { [self] dishes in
-            bringDishes4Date(date: forDate, fromCollection: "Lunch") { [self] lunches in
-                bringDishes(fromCollection: "popularDishes", whereField: "name", has:  dishes) { [self] dishList in
+            Func.bringDishes4Date(date: forDate, fromCollection: "Lunch", view1: popularDishesView, view2: specialDishesView) { [self] lunches in
+                Func.bringDishes(fromCollection: "popularDishes", whereField: "name", has:  dishes, view1: popularDishesView, view2: specialDishesView) { [self] dishList in
                     FilteredPopular = dishList
                     
                     if currentWeekDay == 6 {
-                        bringDishes(fromCollection: "popularDishes", whereField: "name", has:  ["Pizza"]) { [self] pizza in
+                        Func.bringDishes(fromCollection: "popularDishes", whereField: "name", has:  ["Pizza"], view1: popularDishesView, view2: specialDishesView) { [self] pizza in
                             Categories.categories[1].dishes?.append(pizza[0])
                             Categories.categories[2].dishes?.append(pizza[0])
                             FilteredPopular.append(pizza[0])
@@ -145,7 +137,7 @@ class HomeViewController: UIViewController {
         
         //SPECIAL DISHES
         
-        bringDishes4Date(date: forDate, fromCollection: "Lunch") { [self] specialDishesList in
+        Func.bringDishes4Date(date: forDate, fromCollection: "Lunch", view1: popularDishesView, view2: specialDishesView) { [self] specialDishesList in
 //            for fakeDish in specialDishesList {
 //                fakeDish.imageURL = "https://firebasestorage.googleapis.com/v0/b/cafeteria-st-paul.appspot.com/o/Imagen_no_disponible.svg.png?alt=media&token=dd4c889f-12b4-4d0e-ac75-78e8340c5b10"
 //            }
@@ -154,98 +146,14 @@ class HomeViewController: UIViewController {
         
         //DESSERTS
         Func.bringArray(whichArray: "dessertsList") { [self] dishes in
-            bringDishes(fromCollection: "Dessert", whereField: "name", has: dishes) { [self] desserts in
+            Func.bringDishes(fromCollection: "Dessert", whereField: "name", has: dishes, view1: popularDishesView, view2: specialDishesView) { [self] desserts in
                 Categories.categories[3].dishes = desserts // Desserts
             }
         }
         
-        
         completionHandler(FilteredPopular, FilteredBreakfast, FilteredSpecial, FilteredSnackSalado)
         
     }
-    
-    
-    
-    
-    func bringDishes(fromCollection: String, whereField: String, has: [String], completionHandler: @escaping([Dish]) -> Void){
-        
-        var dishList: [Dish] = []
-        let currentWeekDay = Calendar.current.component(.weekday, from: HomeViewController.selectedDate!)
-        db.collection("Dishes").document("All").collection(fromCollection).whereField(whereField, in: has).getDocuments { querySnapshot, error in
-            if error != nil {
-                ProgressHUD.showError(error?.localizedDescription)
-            } else {
-                if let firestoreDocuments = querySnapshot?.documents {
-                    if firestoreDocuments == [] || currentWeekDay == 1 || currentWeekDay == 7 {
-                        ProgressHUD.showError("No dishes available on weekends")
-                        dishList = []
-                        DispatchQueue.main.async {
-                            self.popularDishesView.reloadData()
-                            self.specialDishesView.reloadData()
-                        }
-                    } else {
-                        for doc in firestoreDocuments {
-                            let data = doc.data()
-                            if let description = data["Description"] as? String, let imageurl = data["imageURL"] as? String, let name = data["name"] as? String, let price = data["price"] as? String {
-                                var dish = Dish(name: name, imageURL: imageurl, price: price, description: description)
-                                
-                                dishList.append(dish)
-                                
-                                DispatchQueue.main.async {
-                                    self.popularDishesView.reloadData()
-                                    self.specialDishesView.reloadData()
-                                }
-                            }
-                        }
-                        ProgressHUD.dismiss()
-                    }
-                }
-                
-                completionHandler(dishList)
-            }
-        }
-    }
-    
-    func bringDishes4Date(date: String, fromCollection: String ,completionHandler: @escaping([Dish]) -> Void){
-        
-        var dishList: [Dish] = []
-        let currentWeekDay = Calendar.current.component(.weekday, from: HomeViewController.selectedDate!)
-        db.collection("Dishes").document("All").collection(fromCollection).whereField("dates", arrayContainsAny: [date]).getDocuments { querySnapshot, error in
-            if error != nil {
-                ProgressHUD.showError(error?.localizedDescription)
-            } else {
-                if currentWeekDay == 1 || currentWeekDay == 7 {
-                    ProgressHUD.showError("No dishes available on weekends")
-                } else {
-                    if let firestoreDocuments = querySnapshot?.documents {
-                        if firestoreDocuments == [] {
-                            ProgressHUD.dismiss()
-                        } else {
-                            for doc in firestoreDocuments {
-                                let data = doc.data()
-                                if let description = data["Description"] as? String, /*let imageurl = data["imageURL"] as? String,*/ let name = data["name"] as? String, let price = data["price"] as? String {
-                                    var dish = Dish(name: name, imageURL: /*imageurl*/"https://firebasestorage.googleapis.com/v0/b/cafeteria-st-paul.appspot.com/o/Imagen_no_disponible.svg.png?alt=media&token=dd4c889f-12b4-4d0e-ac75-78e8340c5b10", price: price, description: description)
-                                    dishList.append(dish)
-                                    
-                                    DispatchQueue.main.async {
-                                        self.popularDishesView.reloadData()
-                                        self.specialDishesView.reloadData()
-                                    }
-                                }
-                            }
-                            ProgressHUD.dismiss()
-                        }
-                    }
-                }
-                completionHandler(dishList)
-            }
-        }
-    }
-    
-    
-    
-    
-    
     
     //MARK: - Registering cells
     

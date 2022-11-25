@@ -16,6 +16,8 @@ class DishDetailViewController: UIViewController {
     @IBOutlet weak var dishDetailPrice: UILabel!
     @IBOutlet weak var dishDetailDescription: UILabel!
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     
     //MARK: - Variables and constants
     var selectedDetail: Dish?
@@ -48,6 +50,8 @@ class DishDetailViewController: UIViewController {
                 }
             }
         }
+        
+        setSchedule()
     
     
 }
@@ -74,6 +78,37 @@ func formatDate(dateToUse: Date){
     dateFormatter2.timeZone = .current
     internalFormattedDate = dateFormatter2.string(from: dateToUse)
 }
+    
+//MARK: - Selección de Horario
+    
+    func setSchedule() {
+        switch selectedDetail?.type {
+        case "breakfast":
+            breakfast()
+        case "popularDish":
+            popularDish()
+        case "dessert":
+            desserts()
+        default:
+            print("wow")
+        }
+    }
+    
+    func breakfast() {
+        segmentedControl.setTitle("Before 7 a.m", forSegmentAt: 0)
+        segmentedControl.setTitle("Snack Break", forSegmentAt: 1)
+    }
+    func popularDish() {
+        segmentedControl.setTitle("Snack Break", forSegmentAt: 0)
+        segmentedControl.setTitle("Lunch Break", forSegmentAt: 1)
+        segmentedControl.insertSegment(withTitle: "2 p.m Break", at: 2, animated: false)
+    }
+    func desserts() {
+        segmentedControl.setTitle("Lunch Break", forSegmentAt: 0)
+        segmentedControl.setTitle("2 p.m Break", forSegmentAt: 1)
+    }
+
+    
 
 //MARK: - Compra y exportación de datos a Firestore
 @IBAction func purchaseTapped(_ sender: Any) {
@@ -151,7 +186,6 @@ func sendOrder()  {
                             "uid" : Auth.auth().currentUser!.uid,
                             "orderId" : orderNum + 1,
                             "Retirado" : false,
-                            "imageURL": self.selectedDetail?.imageURL,
                             "details" : textField.text ?? "",
                         ])
                         { error in
@@ -193,6 +227,7 @@ func getFromUsersCollection(completionHandler:@escaping(String, Int, String) -> 
 
 }
 
+//MARK: - Text Field Delegate Methods
 extension DishDetailViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

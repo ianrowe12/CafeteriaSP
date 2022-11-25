@@ -6,6 +6,7 @@ struct Dish {
     var imageURL: String
     let price: String
     let description: String
+    let type: String
 }
 
 

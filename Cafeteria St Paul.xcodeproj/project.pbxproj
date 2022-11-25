@@ -39,7 +39,7 @@
 		799B1CD4283FFD5500314981 /* DishCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 799B1CD2283FFD5500314981 /* DishCell.xib */; };
 		799B1CD6283FFF5600314981 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B1CD5283FFF5600314981 /* Dish.swift */; };
 		799B5D1028EA01C1001A24B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 799B5D0F28EA01C1001A24B1 /* GoogleService-Info.plist */; };
-		799B5D1328EA2242001A24B1 /* funcs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B5D1228EA2242001A24B1 /* funcs.swift */; };
+		799B5D1328EA2242001A24B1 /* Func.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B5D1228EA2242001A24B1 /* Func.swift */; };
 		799F9F3C28412D2000414BB0 /* DishListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F9F3A28412D2000414BB0 /* DishListTableCell.swift */; };
 		799F9F3D28412D2000414BB0 /* DishListTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 799F9F3B28412D2000414BB0 /* DishListTableCell.xib */; };
 		799F9F40284130E100414BB0 /* DishesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F9F3F284130E100414BB0 /* DishesListViewController.swift */; };
@@ -98,7 +98,7 @@
 		799B1CD5283FFF5600314981 /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		799B5D0C28E9FA52001A24B1 /* Cafeteria St Paul.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cafeteria St Paul.entitlements"; sourceTree = "<group>"; };
 		799B5D0F28EA01C1001A24B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		799B5D1228EA2242001A24B1 /* funcs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = funcs.swift; sourceTree = "<group>"; };
+		799B5D1228EA2242001A24B1 /* Func.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Func.swift; sourceTree = "<group>"; };
 		799F9F3A28412D2000414BB0 /* DishListTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishListTableCell.swift; sourceTree = "<group>"; };
 		799F9F3B28412D2000414BB0 /* DishListTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DishListTableCell.xib; sourceTree = "<group>"; };
 		799F9F3F284130E100414BB0 /* DishesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishesListViewController.swift; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 		799B5D1128EA222C001A24B1 /* Funcs4FB */ = {
 			isa = PBXGroup;
 			children = (
-				799B5D1228EA2242001A24B1 /* funcs.swift */,
+				799B5D1228EA2242001A24B1 /* Func.swift */,
 			);
 			path = Funcs4FB;
 			sourceTree = "<group>";
@@ -587,7 +587,7 @@
 				79E2E80F283E632100C08B48 /* HomeViewController.swift in Sources */,
 				79FC60C52874C9670094C448 /* PasswordResetViewController.swift in Sources */,
 				798F36F22869C87C00800EFB /* OrderTableViewCell.swift in Sources */,
-				799B5D1328EA2242001A24B1 /* funcs.swift in Sources */,
+				799B5D1328EA2242001A24B1 /* Func.swift in Sources */,
 				799F9F3C28412D2000414BB0 /* DishListTableCell.swift in Sources */,
 				79FF156728873DDC00717193 /* OrderDetailViewController.swift in Sources */,
 			);
