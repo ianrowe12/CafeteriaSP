@@ -22,5 +22,18 @@ struct K {
             static let specialDishCell = "SpecialDishCell"
         }
     }
+    struct timeString {
+        static let morning = "Before 7 a.m"
+        static let snack = "Snack Break"
+        static let lunch = "Lunch Break"
+        static let afternoon = "2 p.m Break"
+    }
+    
+    struct timeNum {
+        static let sevenAM: Double = 7*60*60
+        static let nineAM: Double = 9*60*60
+        static let elevenAM: Double = 11*60*60
+        static let twoPM: Double = 14*60*60
+    }
 }
 

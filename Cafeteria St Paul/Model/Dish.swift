@@ -1,7 +1,7 @@
 
 import UIKit
 
-struct Dish {
+struct Dish: Equatable {
     let name: String
     var imageURL: String
     let price: String

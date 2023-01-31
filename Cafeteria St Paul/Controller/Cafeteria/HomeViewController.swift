@@ -31,9 +31,9 @@ class HomeViewController: UIViewController {
     
     let db = Firestore.firestore()
     
-    let lastDayOfSchool = "29/11/2022"
+    let lastDayOfSchool = "30/11/2023"
     
-
+    
     
     //MARK: - View Will Dissappear
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,7 +103,7 @@ class HomeViewController: UIViewController {
         ProgressHUD.show("Loading Dishes🍴")
         
         //BREAKFAST
-        Func.bringArray(whichArray: "breakfastsList") { [self] dishes in
+        Func.bringArray(whichArray: "Breakfast") { [self] dishes in
             Func.bringDishes(fromCollection: "Breakfast", whereField: "name", has:  dishes, view1: popularDishesView, view2: specialDishesView) { [self] breakfastList in
                 FilteredBreakfast = breakfastList
                 Categories.categories[0].dishes = breakfastList //Breakfast
@@ -113,40 +113,37 @@ class HomeViewController: UIViewController {
         
         //LUNCHES AND SALTY SNACKS
         
-        Func.bringArray(whichArray: "popularsList") { [self] dishes in
+        Func.bringArray(whichArray: "popularDishes") { [self] dishes in
             Func.bringDishes4Date(date: forDate, fromCollection: "Lunch", view1: popularDishesView, view2: specialDishesView) { [self] lunches in
                 Func.bringDishes(fromCollection: "popularDishes", whereField: "name", has:  dishes, view1: popularDishesView, view2: specialDishesView) { [self] dishList in
                     FilteredPopular = dishList
-                    
-                    if currentWeekDay == 6 {
-                        Func.bringDishes(fromCollection: "popularDishes", whereField: "name", has:  ["Pizza"], view1: popularDishesView, view2: specialDishesView) { [self] pizza in
-                            Categories.categories[1].dishes?.append(pizza[0])
-                            Categories.categories[2].dishes?.append(pizza[0])
-                            FilteredPopular.append(pizza[0])
-                        }
-                    }
                     
                     let concatenatedArray = lunches + dishList
                     Categories.categories[1].dishes = concatenatedArray // Lunch
                     FilteredPopular = dishList
                     Categories.categories[2].dishes = dishList// Fast Snacks
+                    print(Categories.categories[1].dishes)
+                    print(Categories.categories[2].dishes)
+                    print(FilteredPopular)
                 }
             }
         }
         
         
+        
+        
         //SPECIAL DISHES
         
         Func.bringDishes4Date(date: forDate, fromCollection: "Lunch", view1: popularDishesView, view2: specialDishesView) { [self] specialDishesList in
-//            for fakeDish in specialDishesList {
-//                fakeDish.imageURL = "https://firebasestorage.googleapis.com/v0/b/cafeteria-st-paul.appspot.com/o/Imagen_no_disponible.svg.png?alt=media&token=dd4c889f-12b4-4d0e-ac75-78e8340c5b10"
-//            }
+            //            for fakeDish in specialDishesList {
+            //                fakeDish.imageURL = "https://firebasestorage.googleapis.com/v0/b/cafeteria-st-paul.appspot.com/o/Imagen_no_disponible.svg.png?alt=media&token=dd4c889f-12b4-4d0e-ac75-78e8340c5b10"
+            //            }
             FilteredSpecial = specialDishesList
         }
         
         //DESSERTS
-        Func.bringArray(whichArray: "dessertsList") { [self] dishes in
-            Func.bringDishes(fromCollection: "Dessert", whereField: "name", has: dishes, view1: popularDishesView, view2: specialDishesView) { [self] desserts in
+        Func.bringArray(whichArray: "Dessert") { [self] dishes in
+            Func.bringDishes(fromCollection: "Dessert", whereField: "name", has:  dishes, view1: popularDishesView, view2: specialDishesView) { [self] desserts in
                 Categories.categories[3].dishes = desserts // Desserts
             }
         }
@@ -154,6 +151,7 @@ class HomeViewController: UIViewController {
         completionHandler(FilteredPopular, FilteredBreakfast, FilteredSpecial, FilteredSnackSalado)
         
     }
+    
     
     //MARK: - Registering cells
     
@@ -256,6 +254,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         
         collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    
+}
+
+//MARK: - Extension to remove pizza from array
+extension Array where Element: Equatable {
+    
+    // Remove first collection element that is equal to the given `object`:
+    mutating func remove(object: Element) {
+        guard let index = firstIndex(of: object) else {return}
+        remove(at: index)
     }
     
 }

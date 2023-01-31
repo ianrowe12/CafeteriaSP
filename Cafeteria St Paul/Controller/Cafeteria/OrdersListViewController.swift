@@ -51,6 +51,7 @@ class OrdersListViewController: UIViewController {
             .whereField("uid", isEqualTo: Auth.auth().currentUser!.uid)
             .order(by: "Interval", descending: false).getDocuments { querySnapshot, error in
                 if error != nil {
+                    ProgressHUD.showError("Error: \(error)")
                     print("There was an error retrieving the order from Firestore: \(error). Simple error description: \(error!.localizedDescription)")
                 } else {
                     if let firestoreDocuments = querySnapshot?.documents {
@@ -63,10 +64,16 @@ class OrdersListViewController: UIViewController {
                                 print("OK2")
                                 let orderNUMBER = doc.documentID
                                 let data = doc.data()
-                                if let dish = data["Platillo"] as? String, let date = data["Date"] as? String, let interval = data["Interval"] as? Double, let orderNum = orderNUMBER as? String, let userName = data["Nombre"] as? String, let image = data["imageURL"] as? String {
+                                if let dish = data["Platillo"] as? String,
+                                    let date = data["Date"] as? String,
+                                    let interval = data["Interval"] as? Int,
+                                    let orderNum = orderNUMBER as? String,
+                                    let userName = data["Nombre"] as? String,
+                                    let hour = data["Hora"] as? String,
+                                    let image = data["imageURL"] as? String {
                                     print("OK3")
-                                    if interval > Date().timeIntervalSince1970 - 60*60*14 {
-                                        let order = Order(date: date, orderNum: orderNum, userName: userName, dishName: dish, imageURL: image)
+                                    if interval > Int(Date().timeIntervalSince1970 - 60*60*14) {
+                                        let order = Order(date: date, hour: hour, orderNum: orderNum, userName: userName, dishName: dish, imageURL: image)
                                         
                                         self.orders.append(order)
                                         print("OK4")

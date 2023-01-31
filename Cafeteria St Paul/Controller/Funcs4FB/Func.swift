@@ -5,28 +5,36 @@ import ProgressHUD
 let db = Firestore.firestore()
 struct Func {
     
+    
     static func bringArray(whichArray: String, completionHandler:@escaping([String]) -> Void) {
-        db.collection("Dishes").document("All").collection(whichArray).getDocuments { docSnapshot, error in
+        var nameArray: [String] = []
+        let currentWeekDay = Calendar.current.component(.weekday, from: HomeViewController.selectedDate!)
+        
+        db.collection("Dishes").document("All").collection(whichArray).getDocuments { querySnapshot, error in
             if error != nil {
-                ProgressHUD.showError("Error showing dishes available.")
+                ProgressHUD.showError(error?.localizedDescription)
             } else {
-                if let firestoreDocument = docSnapshot {
-                    
-                    let data = firestoreDocument.data()
-                    if let array = data!["dishes"] as? [String] {
-                        completionHandler (array)
+                if let firestoreDocument = querySnapshot?.documents {
+                    for doc in firestoreDocument {
+                        let data = doc.data()
+                        
+                        if let name = data["name"] as? String {
+                            nameArray.append(name)
+                            completionHandler (nameArray)
+                        }
                     }
-                    
                 }
             }
         }
     }
     
+    
+    
     static func bringDishes(fromCollection: String, whereField: String, has: [String], view1: UICollectionView, view2: UICollectionView, completionHandler: @escaping([Dish]) -> Void){
         
         var dishList: [Dish] = []
         let currentWeekDay = Calendar.current.component(.weekday, from: HomeViewController.selectedDate!)
-        db.collection("Dishes").document("All").collection(fromCollection).whereField(whereField, in: has).getDocuments { querySnapshot, error in
+        db.collection("Dishes").document("All").collection(fromCollection).getDocuments { querySnapshot, error in
             if error != nil {
                 ProgressHUD.showError(error?.localizedDescription)
             } else {
@@ -41,18 +49,35 @@ struct Func {
                     } else {
                         for doc in firestoreDocuments {
                             let data = doc.data()
-                            if let description = data["Description"] as? String,
-                               let imageurl = data["imageURL"] as? String,
-                               let name = data["name"] as? String,
-                               let price = data["price"] as? String,
-                               let type = data["type"] as? String {
-                                var dish = Dish(name: name, imageURL: imageurl, price: price, description: description, type: type)
-                                
-                                dishList.append(dish)
-                                
-                                DispatchQueue.main.async {
-                                    view1.reloadData()
-                                    view2.reloadData()
+                            if data["name"] as? String != "Pizza" {
+                                if let description = data["Description"] as? String,
+                                   let imageurl = data["imageURL"] as? String,
+                                   let name = data["name"] as? String,
+                                   let price = data["price"] as? String,
+                                   let type = data["type"] as? String {
+                                    let dish = Dish(name: name, imageURL: imageurl, price: price, description: description, type: type)
+                                    
+                                    dishList.append(dish)
+                                    
+                                    DispatchQueue.main.async {
+                                        view1.reloadData()
+                                        view2.reloadData()
+                                    }
+                                }
+                            } else if data["name"] as? String == "Pizza" && currentWeekDay == 6 {
+                                if let description = data["Description"] as? String,
+                                   let imageurl = data["imageURL"] as? String,
+                                   let name = data["name"] as? String,
+                                   let price = data["price"] as? String,
+                                   let type = data["type"] as? String {
+                                    let dish = Dish(name: name, imageURL: imageurl, price: price, description: description, type: type)
+                                    
+                                    dishList.append(dish)
+                                    
+                                    DispatchQueue.main.async {
+                                        view1.reloadData()
+                                        view2.reloadData()
+                                    }
                                 }
                             }
                         }
@@ -87,7 +112,7 @@ struct Func {
                                    let name = data["name"] as? String,
                                    let price = data["price"] as? String,
                                    let type = data["type"] as? String {
-                                    var dish = Dish(name: name, imageURL: imageurl, price: price, description: description, type: type)
+                                    let dish = Dish(name: name, imageURL: imageurl, price: price, description: description, type: type)
                                     dishList.append(dish)
                                     
                                     DispatchQueue.main.async {

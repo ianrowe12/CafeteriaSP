@@ -5,6 +5,7 @@ class OrderDetailViewController: UIViewController {
 
     var order: Order?
     
+    @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var orderNum: UILabel!
     @IBOutlet weak var retrievalDate: UILabel!
     @IBOutlet weak var dishLabel: UILabel!
@@ -22,6 +23,7 @@ class OrderDetailViewController: UIViewController {
         DispatchQueue.main.async {
             self.orderNum.text = Order.orderNum
             self.retrievalDate.text = Order.date
+            self.hourLabel.text = Order.hour
             self.dishLabel.text = Order.dishName
             self.userName.text = Order.userName
         }
