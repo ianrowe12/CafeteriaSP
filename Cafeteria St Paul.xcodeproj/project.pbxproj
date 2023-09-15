@@ -737,19 +737,21 @@
 				DEVELOPMENT_TEAM = 2V636U3DWT;
 				ENABLE_APP_SANDBOX = NO;
 				INFOPLIST_FILE = "Cafeteria St Paul/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.5;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -enable-experimental-concurrency";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Ian-Rowe.Cafeteria-St-PaulMacOs";
+				PRODUCT_BUNDLE_IDENTIFIER = "Ian-Rowe.Cafeteria-St-Paul";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -767,19 +769,21 @@
 				DEVELOPMENT_TEAM = 2V636U3DWT;
 				ENABLE_APP_SANDBOX = NO;
 				INFOPLIST_FILE = "Cafeteria St Paul/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.5;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -enable-experimental-concurrency";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Ian-Rowe.Cafeteria-St-PaulMacOs";
+				PRODUCT_BUNDLE_IDENTIFIER = "Ian-Rowe.Cafeteria-St-Paul";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

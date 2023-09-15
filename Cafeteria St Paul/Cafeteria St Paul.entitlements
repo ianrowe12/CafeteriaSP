@@ -5,8 +5,6 @@
 	<key>com.apple.security.network.client</key>
 	<true/>
 	<key>keychain-access-groups</key>
-	<array>
-		<string>$(AppIdentifierPrefix)com.Ian-Rowe.Cafeteria-St-PaulMacOs</string>
-	</array>
+	<array/>
 </dict>
 </plist>
